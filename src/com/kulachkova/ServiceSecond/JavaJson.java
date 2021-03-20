@@ -9,37 +9,12 @@ import java.util.List;
 
 public class JavaJson {
 
-    public void runServiceOne () {
+    public List<Ship> runServiceOne () {
         ShipGenerator ship = new ShipGenerator(10);
-        List<Ship> ships = ship.getShips();
-        writeServiceOne(ships);
+        return ship.getShips();
     }
 
-    private void writeServiceOne (List<Ship> ships) {
-        JSONArray shipJSON = new JSONArray();
-        for (Ship ship : ships) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Name ship", ship.getName_());
-            jsonObject.put("Arrival date", ship.getTimeBegin_());
-            jsonObject.put("Departure date", ship.getTimeEnd_());
-            jsonObject.put("Type of cargo", ship.getNameType());
-            jsonObject.put("Number of cargo", ship.getNumberOfCargo());
-            shipJSON.put(jsonObject);
-        }
-        try (FileWriter file = new FileWriter("src\\resourse\\ship.JSON")) {
-            file.write(shipJSON.toString());
-            System.out.println("Successfully Copied JSON Object to File...");
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void getServiceThree (List<Ship> ships) {
-        writeServiceThree(ships);
-    }
-
-    private void writeServiceThree (List<Ship> ships) {
+    public void write (List<Ship> ships) {
         JSONArray shipJSON = new JSONArray();
         for (Ship ship : ships) {
             JSONObject jsonObject = new JSONObject();

@@ -88,14 +88,6 @@ public class Ship implements Comparable<Ship> {
         this.realTimeArrival_ = realTimeArrival_;
     }
 
-    public Cargo getCargo_ () {
-        return cargo_;
-    }
-
-    public void setCargo_ (Cargo cargo_) {
-        this.cargo_ = cargo_;
-    }
-
     public int getFine_ () {
         return fine_;
     }

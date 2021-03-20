@@ -7,11 +7,11 @@ import com.kulachkova.ServiceThree.Unloading;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         JavaJson jsonJava = new JavaJson();
-        jsonJava.runServiceOne();
+
         System.out.println("\n\n============================================================\n                   UPLOADING");
-        Unloading unloading = new Unloading();
+        Unloading unloading = new Unloading(jsonJava.runServiceOne());
         Thread.sleep(1000);
-        jsonJava.getServiceThree(unloading.getListAll());
+        jsonJava.write(unloading.getListAll());
         unloading.getResult();
     }
 }

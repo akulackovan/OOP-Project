@@ -11,7 +11,13 @@ public class ShipGenerator {
     public ShipGenerator (int number) {
         ships = new ArrayList<Ship>();
         for (int i = 0; i < number; i++) {
-            ships.add(CreateShip());
+            try {
+
+                ships.add(CreateShip());
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
         }
         Collections.sort(ships);
         System.out.println(ships);
@@ -30,7 +36,7 @@ public class ShipGenerator {
         return string.toString();
     }
 
-    public Ship.Cargo CreateCargo () {
+    public Ship.Cargo CreateCargo () throws Exception {
         String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = "";
         switch ((int) (Math.random() * 3)) {
@@ -43,12 +49,15 @@ public class ShipGenerator {
             case 2 -> {
                 name = nameOfType[2];
             }
+            default -> {
+                throw new Exception();
+            }
         }
-        int number = (int) (Math.random() * 50) + 1;
+        int number = (int) (Math.random() * 200) + 1;
         return new Ship.Cargo(name, number);
     }
 
-    private Ship CreateShip () {
+    private Ship CreateShip () throws Exception {
         String[] nameOfShips = new String[]{"Alexandria", "Blue", "Aurora", "Gotha", "Grossadler", "Hawksub",
                 "Sea Queen", "Vulkan", "Empress", "Titanic", "Lenin", "Varyag", "Bismark", "Bebop", "Colossan", "Inferno",
                 "St. George", "Valhalla", "Stand. Victoria", "Calypso", "Demetor"};

@@ -11,11 +11,11 @@ import java.util.*;
 
 public class ArrivalOfShips {
 
-    public ArrivalOfShips () {
+    public ArrivalOfShips (List<Ship> ships) {
         loose = new ArrayList<Ship>();
         liquid = new ArrayList<Ship>();
         container = new ArrayList<Ship>();
-        read();
+        read(ships);
         loose.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         liquid.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         container.sort(Comparator.comparing(Ship::getRealTimeArrival_));
@@ -33,26 +33,10 @@ public class ArrivalOfShips {
         return loose;
     }
 
-    private void read () {
-        try (FileReader reader = new FileReader("src\\resourse\\ship.JSON")) {
-            JSONParser jsonParser = new JSONParser();
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
-            for (Object o : jsonArray) {
-                JSONObject object = (JSONObject) o;
-                String typeCargo = (String) object.get("Type of cargo");
-                String name = (String) object.get("Name ship");
-                String arrivalDate = (String) object.get("Arrival date");
-                String departureDate = (String) object.get("Departure date");
-                Timestamp begin = Timestamp.valueOf(arrivalDate);
-                Timestamp end = Timestamp.valueOf(departureDate);
-                long numberStr = (long) object.get("Number of cargo");
-                Ship ship = new Ship(name, begin, end, typeCargo, Math.toIntExact(numberStr));
-                randomTime(ship);
-                addToList(ship);
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e);
+    private void read (List<Ship> ships) {
+        for (Ship o : ships) {
+            randomTime(o);
+            addToList(o);
         }
     }
 
