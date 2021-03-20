@@ -11,9 +11,9 @@ public class Unloading {
 
     public Unloading () throws InterruptedException {
         ArrivalOfShips arrivalOfShips = new ArrivalOfShips();
-        List<Ship> looseList = arrivalOfShips.getLoose();
-        List<Ship> liquidList = arrivalOfShips.getLiquid();
-        List<Ship> containerList = arrivalOfShips.getContainer();
+        looseList = arrivalOfShips.getLoose();
+        liquidList = arrivalOfShips.getLiquid();
+        containerList = arrivalOfShips.getContainer();
         looseCrane = new ArrayList<Crane>();
         liquidCrane = new ArrayList<Crane>();
         containerCrane = new ArrayList<Crane>();
@@ -45,8 +45,7 @@ public class Unloading {
             if (i != 0) {
                 queue(ships.get(i - 1), ships.get(i));
             }
-            int delay = 0;
-            delay = crane.unloading(ships.get(i));
+            int delay = crane.unloading(ships.get(i));
             setFine(ships.get(i));
             synchronized (Unloading.class) {
                 numberOfShips++;
@@ -58,21 +57,21 @@ public class Unloading {
                 print(ships.get(i));
             }
         }
-
     }
 
     public void print (Ship ship) {
-        System.out.println(
-                "=================================================================\nShip №" + numberOfShips + "\nName "
-                        + ship
-                        .getName_() + "\nTime arrive real " + ship
-                        .getRealTimeArrival_() + "\nNeed arrival " + ship
-                        .getTimeBegin_() + "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end " + ship
-                        .getRealTimeEnd_() + "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(
-                        ship) + "\nFine " + ship.getFine_());
+        System.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
+                ship.getName_() + "\nTime arrive real " + ship.getRealTimeArrival_() +
+                "\nType " + ship.getTypeOfCargo() + "\nNeed arrival " + ship.getTimeBegin_() +
+                "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end " + ship.getRealTimeEnd_() +
+                "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(ship) +
+                "\nFine " + ship.getFine_());
     }
 
     public void getResult () {
+        getLengthOfQueue(looseList);
+        getLengthOfQueue(liquidList);
+        getLengthOfQueue(containerList);
         System.out.println("\n\n===========================================================\n       RESULT");
         System.out.println("Max daley " + maxDelay);
         System.out.println("Middle daley " + (allDelay / numberOfShips));
@@ -81,6 +80,7 @@ public class Unloading {
         System.out.println("Time max " + convertTime(timeMax));
         System.out.println("Time min " + convertTime(timeMin));
         System.out.println("All fine " + fine);
+        System.out.println("Middle queue length " + (length / numberOfShipsInQueue));
     }
 
     public void queue (Ship shipFirst, Ship shipSecond) {
@@ -131,16 +131,31 @@ public class Unloading {
         return String.format("%02d:%02d:%02d", day, hour, min);
     }
 
+    public void getLengthOfQueue (List<Ship> ships) {
+        for (int i = 1; i < ships.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (ships.get(j).getRealTimeEnd_().compareTo(ships.get(i).getRealTimeArrival_()) > 0) {
+                    length += (i - j);
+                    numberOfShipsInQueue++;
+                }
+            }
+        }
+    }
+
     private List<Crane> looseCrane;
     private List<Crane> liquidCrane;
     private List<Crane> containerCrane;
-    private List<Ship> all;
+    private List<Ship> looseList;
+    private List<Ship> liquidList;
+    private List<Ship> containerList;
     private int fine = 0;
     private int numberOfShips = 0;
+    private int numberOfShipsInQueue = 0;
     private long time = 0;
     private long timeMin = 0;
     private long timeMax = 0;
     private int maxDelay = 0;
     private int allDelay = 0;
+    private int length = 0;
 
 }

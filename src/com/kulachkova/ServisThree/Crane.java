@@ -25,5 +25,4 @@ public class Crane {
         ship.setRealTimeEnd_(timestamp);
         return minuteRand;
     }
-
 }
