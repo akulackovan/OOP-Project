@@ -16,9 +16,7 @@ public class Crane {
             case LIQUID -> 2;
             case CONTAINER -> 1;
         };
-        for (int i = 0; i < ship.getNumberOfCargo(); i++) {
-            cal.add(Calendar.HOUR, timeInHours);
-        }
+        cal.add(Calendar.HOUR, timeInHours * ship.getNumberOfCargo());
         int minuteRand = (int) (Math.random() * 1440);
         cal.add(Calendar.MINUTE, minuteRand);
         timestamp = new Timestamp(cal.getTime().getTime());

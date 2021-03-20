@@ -31,9 +31,7 @@ public class Ship implements Comparable<Ship> {
             case LIQUID -> 2;
             case CONTAINER -> 1;
         };
-        for (int i = 0; i < cargo_.number_; i++) {
-            cal.add(Calendar.HOUR, timeInHours);
-        }
+        cal.add(Calendar.HOUR, cargo_.number_ * timeInHours);
         timestamp = new Timestamp(cal.getTime().getTime());
         return timestamp;
     }

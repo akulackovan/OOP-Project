@@ -17,13 +17,13 @@ public class JavaJson {
 
     private void writeServiceOne (List<Ship> ships) {
         JSONArray shipJSON = new JSONArray();
-        for (int i = 0; i < ships.size(); i++) {
+        for (Ship ship : ships) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Name ship", ships.get(i).getName_());
-            jsonObject.put("Arrival date", ships.get(i).getTimeBegin_());
-            jsonObject.put("Departure date", ships.get(i).getTimeEnd_());
-            jsonObject.put("Type of cargo", ships.get(i).getNameType());
-            jsonObject.put("Number of cargo", ships.get(i).getNumberOfCargo());
+            jsonObject.put("Name ship", ship.getName_());
+            jsonObject.put("Arrival date", ship.getTimeBegin_());
+            jsonObject.put("Departure date", ship.getTimeEnd_());
+            jsonObject.put("Type of cargo", ship.getNameType());
+            jsonObject.put("Number of cargo", ship.getNumberOfCargo());
             shipJSON.put(jsonObject);
         }
         try (FileWriter file = new FileWriter("src\\resourse\\ship.JSON")) {
@@ -41,18 +41,18 @@ public class JavaJson {
 
     private void writeServiceThree (List<Ship> ships) {
         JSONArray shipJSON = new JSONArray();
-        for (int i = 0; i < ships.size(); i++) {
+        for (Ship ship : ships) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Name ship", ships.get(i).getName_());
-            jsonObject.put("Arrival date", ships.get(i).getTimeBegin_());
-            jsonObject.put("Departure date", ships.get(i).getTimeEnd_());
-            jsonObject.put("Type of cargo", ships.get(i).getNameType());
-            jsonObject.put("Number of cargo", ships.get(i).getNumberOfCargo());
-            jsonObject.put("Real arrival date", ships.get(i).getRealTimeArrival_());
-            jsonObject.put("Real time begin unloading", ships.get(i).getRealTimeBegin_());
-            jsonObject.put("Real time end unloading", ships.get(i).getRealTimeEnd_());
-            jsonObject.put("Wait time", ships.get(i).getWaitTime_());
-            jsonObject.put("Fine", ships.get(i).getFine_());
+            jsonObject.put("Name ship", ship.getName_());
+            jsonObject.put("Arrival date", ship.getTimeBegin_());
+            jsonObject.put("Departure date", ship.getTimeEnd_());
+            jsonObject.put("Type of cargo", ship.getNameType());
+            jsonObject.put("Number of cargo", ship.getNumberOfCargo());
+            jsonObject.put("Real arrival date", ship.getRealTimeArrival_());
+            jsonObject.put("Real time begin unloading", ship.getRealTimeBegin_());
+            jsonObject.put("Real time end unloading", ship.getRealTimeEnd_());
+            jsonObject.put("Wait time", ship.getWaitTime_());
+            jsonObject.put("Fine", ship.getFine_());
             shipJSON.put(jsonObject);
         }
         try (FileWriter file = new FileWriter("src\\resourse\\arrivalOfShips.JSON")) {

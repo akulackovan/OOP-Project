@@ -23,32 +23,28 @@ public class ShipGenerator {
 
     @Override
     public String toString () {
-        String string = "Schedule of ships\n";
+        StringBuilder string = new StringBuilder("Schedule of ships\n");
         for (int i = 0; i < ships.size(); i++) {
-            string += "Ship №" + (i + 1) + "\n" + String.valueOf(ships.get(i)) + "\n\n";
+            string.append("Ship №").append(i + 1).append("\n").append(String.valueOf(ships.get(i))).append("\n\n");
         }
-        return string;
+        return string.toString();
     }
 
     public Ship.Cargo CreateCargo () {
         String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = "";
-        int number = 0;
-        Random random = new Random();
-        switch (random.nextInt(3)) {
+        switch ((int) (Math.random() * 3)) {
             case 0 -> {
                 name = nameOfType[0];
-                number = random.nextInt(50) + 1;
             }
             case 1 -> {
                 name = nameOfType[1];
-                number = random.nextInt(50 + 1);
             }
             case 2 -> {
                 name = nameOfType[2];
-                number = random.nextInt(50) + 1;
             }
         }
+        int number = (int) (Math.random() * 50) + 1;
         return new Ship.Cargo(name, number);
     }
 

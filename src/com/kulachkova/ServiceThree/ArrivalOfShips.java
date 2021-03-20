@@ -37,8 +37,8 @@ public class ArrivalOfShips {
         try (FileReader reader = new FileReader("src\\resourse\\ship.JSON")) {
             JSONParser jsonParser = new JSONParser();
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject object = (JSONObject) jsonArray.get(i);
+            for (Object o : jsonArray) {
+                JSONObject object = (JSONObject) o;
                 String typeCargo = (String) object.get("Type of cargo");
                 String name = (String) object.get("Name ship");
                 String arrivalDate = (String) object.get("Arrival date");
