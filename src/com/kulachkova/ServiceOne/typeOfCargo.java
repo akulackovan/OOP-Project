@@ -1,4 +1,4 @@
-package com.kulachkova.ServisOne;
+package com.kulachkova.ServiceOne;
 
 public enum typeOfCargo {
     LOOSE,

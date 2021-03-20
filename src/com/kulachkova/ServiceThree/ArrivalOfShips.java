@@ -1,6 +1,6 @@
-package com.kulachkova.ServisThree;
+package com.kulachkova.ServiceThree;
 
-import com.kulachkova.ServisOne.Ship;
+import com.kulachkova.ServiceOne.Ship;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 

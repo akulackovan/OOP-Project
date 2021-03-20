@@ -1,4 +1,4 @@
-package com.kulachkova.ServisOne;
+package com.kulachkova.ServiceOne;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ public class ShipGenerator {
             ships.add(CreateShip());
         }
         Collections.sort(ships);
+        System.out.println(ships);
     }
 
     public List<Ship> getShips () {

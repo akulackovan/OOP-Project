@@ -1,6 +1,6 @@
-package com.kulachkova.ServisThree;
+package com.kulachkova.ServiceThree;
 
-import com.kulachkova.ServisOne.Ship;
+import com.kulachkova.ServiceOne.Ship;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -39,6 +39,15 @@ public class Unloading {
         liquid.start();
         container.start();
     }
+
+    public List<Ship> getListAll() {
+        List<Ship> all = new ArrayList<Ship>();
+        all.addAll(0, looseList);
+        all.addAll(looseList.size(), liquidList);
+        all.addAll(liquidList.size(), containerList);
+        return all;
+    }
+
 
     public void runWork (Crane crane, List<Ship> ships) {
         for (int i = 0; i < ships.size(); i++) {
@@ -80,6 +89,9 @@ public class Unloading {
         System.out.println("Time max " + convertTime(timeMax));
         System.out.println("Time min " + convertTime(timeMin));
         System.out.println("All fine " + fine);
+        if (numberOfShipsInQueue == 0) {
+            numberOfShipsInQueue = 1;
+        }
         System.out.println("Middle queue length " + (length / numberOfShipsInQueue));
     }
 

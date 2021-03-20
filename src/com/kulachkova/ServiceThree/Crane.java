@@ -1,6 +1,6 @@
-package com.kulachkova.ServisThree;
+package com.kulachkova.ServiceThree;
 
-import com.kulachkova.ServisOne.*;
+import com.kulachkova.ServiceOne.*;
 
 import java.sql.Timestamp;
 import java.util.Calendar;

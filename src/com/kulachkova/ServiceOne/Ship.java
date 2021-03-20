@@ -1,4 +1,4 @@
-package com.kulachkova.ServisOne;
+package com.kulachkova.ServiceOne;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
