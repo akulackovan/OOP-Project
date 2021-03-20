@@ -12,6 +12,7 @@ public class Ship implements Comparable<Ship> {
         timeEnd_ = stay(timeBegin);
         fine_ = 0;
         waitTime_ = "00:00:00";
+        uploading = false;
     }
 
     public Ship (String name, Timestamp timeBegin, Timestamp timeEnd, String nameOfCargo, int numberOfCargo) {
@@ -21,6 +22,7 @@ public class Ship implements Comparable<Ship> {
         timeEnd_ = timeEnd;
         fine_ = 0;
         waitTime_ = "00:00:00";
+        uploading = false;
     }
 
     public Timestamp stay (Timestamp timestamp) {
@@ -130,6 +132,16 @@ public class Ship implements Comparable<Ship> {
         this.realTimeBegin_ = realTimeBegin_;
     }
 
+    public void isUploading()
+    {
+        uploading = true;
+    }
+
+    public boolean getUploading()
+    {
+        return uploading;
+    }
+
     public static class Cargo {
 
         public Cargo (String name, int number) {
@@ -160,4 +172,5 @@ public class Ship implements Comparable<Ship> {
     private String waitTime_;
     private Cargo cargo_;
     private int fine_;
+    private boolean uploading;
 }

@@ -1,6 +1,7 @@
 package com.kulachkova.ServiceThree;
 
 import com.kulachkova.ServiceOne.Ship;
+import com.kulachkova.ServiceOne.typeOfCargo;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,37 +18,31 @@ public class Unloading {
         looseCrane = new ArrayList<Crane>();
         liquidCrane = new ArrayList<Crane>();
         containerCrane = new ArrayList<Crane>();
-        looseCrane.add(new Crane());
-        liquidCrane.add(new Crane());
-        containerCrane.add(new Crane());
-        Thread loose = new Thread() {
-            public void run () {
-                runWork(looseCrane.get(0), looseList);
-            }
-        };
-        Thread liquid = new Thread() {
-            public void run () {
-                runWork(liquidCrane.get(0), liquidList);
-            }
-        };
-        Thread container = new Thread() {
-            public void run () {
-                runWork(containerCrane.get(0), containerList);
-            }
-        };
+        Thread loose = new Thread(() -> {
+            looseCrane.add(new Crane(typeOfCargo.LOOSE));
+            runWork(looseCrane.get(0), looseList);
+        });
+        Thread liquid = new Thread(() -> {
+
+            liquidCrane.add(new Crane(typeOfCargo.LIQUID));
+            runWork(liquidCrane.get(0), liquidList);
+        });
+        Thread container = new Thread(() -> {
+            containerCrane.add(new Crane(typeOfCargo.CONTAINER));
+            runWork(containerCrane.get(0), containerList);
+        });
         loose.start();
         liquid.start();
         container.start();
     }
 
-    public List<Ship> getListAll() {
+    public List<Ship> getListAll () {
         List<Ship> all = new ArrayList<Ship>();
         all.addAll(0, looseList);
         all.addAll(looseList.size(), liquidList);
         all.addAll(liquidList.size(), containerList);
         return all;
     }
-
 
     public void runWork (Crane crane, List<Ship> ships) {
         for (int i = 0; i < ships.size(); i++) {
@@ -138,7 +133,7 @@ public class Unloading {
 
     public String convertTime (long time) {
         int day = (int) (time / (24 * 60 * 60 * 1000));
-        int hour = (int) (time / 1000 / 3600);
+        int hour = (int) (time / 1000 / 3600 % 60);
         int min = (int) (time / 1000 / 60 % 60);
         return String.format("%02d:%02d:%02d", day, hour, min);
     }

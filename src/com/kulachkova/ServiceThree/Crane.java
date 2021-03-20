@@ -7,20 +7,29 @@ import java.util.Calendar;
 
 public class Crane {
 
+    public Crane (typeOfCargo type) {
+        switch (type) {
+            case LOOSE -> power = 1;
+            case LIQUID -> power = 2;
+            case CONTAINER -> power = 1;
+        }
+    }
+
     public int unloading (Ship ship) {
+        work = true;
         Timestamp timestamp = ship.getRealTimeBegin_();
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());
-        int timeInHours = switch (ship.getTypeOfCargo()) {
-            case LOOSE -> 1;
-            case LIQUID -> 2;
-            case CONTAINER -> 1;
-        };
-        cal.add(Calendar.HOUR, timeInHours * ship.getNumberOfCargo());
+        cal.add(Calendar.HOUR, power * ship.getNumberOfCargo());
         int minuteRand = (int) (Math.random() * 1440);
         cal.add(Calendar.MINUTE, minuteRand);
         timestamp = new Timestamp(cal.getTime().getTime());
         ship.setRealTimeEnd_(timestamp);
+        work = false;
+        ship.isUploading();
         return minuteRand;
     }
+
+    int power = 0;
+    boolean work = false;
 }
