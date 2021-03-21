@@ -16,9 +16,7 @@ public class Unloading {
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
         for (int i = 0; i < looseList.size(); i++) {
-            for (int j = 0; j < i; j++) {
-                workCrane(typeOfCargo.LOOSE, looseList);
-            }
+            workCrane(typeOfCargo.LOOSE, looseList);
         }
         for (int i = 0; i < liquidList.size(); i++) {
             workCrane(typeOfCargo.LIQUID, liquidList);
@@ -29,7 +27,7 @@ public class Unloading {
     }
 
     public List<Ship> getListAll () {
-        List<Ship> all = new ArrayList<Ship>();
+        List<Ship> all = new ArrayList<>();
         all.addAll(0, looseList);
         all.addAll(looseList.size(), liquidList);
         all.addAll(liquidList.size(), containerList);
@@ -38,8 +36,11 @@ public class Unloading {
 
     public void workCrane (typeOfCargo type, List<Ship> ships) {
         Thread loose = new Thread(() -> {
-            int last = 0;
+            int last = -1;
             Crane crane = new Crane(type);
+            synchronized (Unloading.class) {
+                numberOfCrane += 1;
+            }
             for (int j = 0; j < ships.size(); j++) {
                 int i = 0;
                 synchronized (Unloading.class) {
@@ -47,10 +48,10 @@ public class Unloading {
                         i++;
                     }
                     if (i == ships.size()) return;
-                    ships.get(i).isUploading();
-                }
-                if (last != 0) {
-                    queue(ships.get(last), ships.get(i));
+                    ships.get(i).isUploading(true);
+                    if (last != -1) {
+                        queue(ships.get(last), ships.get(i));
+                    }
                 }
                 int delay = crane.unloading(ships.get(i));
                 setFine(ships.get(i));
@@ -63,15 +64,9 @@ public class Unloading {
                     fine += ships.get(i).getFine_();
                     print(ships.get(i));
                 }
-                System.out.println(numberOfShips);
                 last = i;
             }
-            System.out.println(numberOfCrane);
-
         });
-        synchronized (Unloading.class) {
-            numberOfCrane += 1;
-        }
         loose.start();
     }
 
@@ -79,9 +74,9 @@ public class Unloading {
         System.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
                 ship.getName_() + "\nTime arrive real " + ship.getRealTimeArrival_() +
                 "\nType " + ship.getTypeOfCargo() + "\nNeed arrival " + ship.getTimeBegin_() +
-                "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end " + ship.getRealTimeEnd_() +
+                "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end real " + ship.getRealTimeEnd_() +
                 "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(ship) +
-                "\nFine " + ship.getFine_());
+                "\nFine " + ship.getFine_() + "\nTime end  " + ship.getTimeEnd_());
     }
 
     public void getResult () {
@@ -94,11 +89,10 @@ public class Unloading {
         System.out.println("Time max " + convertTime(timeMax));
         System.out.println("Time min " + convertTime(timeMin));
         System.out.println("All fine " + fine);
-        System.out.println("All fine " + numberOfCrane);
+        System.out.println("Number Of Crane " + numberOfCrane);
         if (numberOfShipsInQueue == 0) {
             numberOfShipsInQueue = 1;
         }
-        System.out.println("Middle queue length " + (length / numberOfShipsInQueue));
     }
 
     public void queue (Ship shipFirst, Ship shipSecond) {
@@ -107,9 +101,14 @@ public class Unloading {
         long milliseconds = second.getTime() - first.getTime();
         if (milliseconds < 0) {
             milliseconds *= -1;
+            int minute = (int) (milliseconds / 1000 / 60 % 60);
+            int day = (int) (milliseconds / (24 * 60 * 60 * 1000));
+            int hour = (int) (milliseconds / 1000 / 3600 % 60);
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(second.getTime());
-            cal.add(Calendar.MILLISECOND, Math.toIntExact(milliseconds));
+            cal.add(Calendar.MINUTE, Math.toIntExact(minute));
+            cal.add(Calendar.HOUR, Math.toIntExact(hour));
+            cal.add(Calendar.DAY_OF_YEAR, Math.toIntExact(day));
             synchronized (Unloading.class) {
                 if (milliseconds < timeMin || timeMin == 0) {
                     timeMin = milliseconds;
@@ -129,9 +128,9 @@ public class Unloading {
         Timestamp need = ship.getTimeEnd_();
         Timestamp read = ship.getRealTimeEnd_();
         long milliseconds = read.getTime() - need.getTime();
-        if (milliseconds < 0) {
-            milliseconds = (int) (time / 1000 / 3600);
-            ship.setFine_((int) (milliseconds * 100));
+        if (milliseconds > 0) {
+            long fine = (int) ((milliseconds / 1000 / 3600 % 60 ) + 24 * (milliseconds / (24 * 60 * 60 * 1000) ) * 100);
+            ship.setFine_((int) (fine));
         }
     }
 
@@ -149,10 +148,10 @@ public class Unloading {
         return String.format("%02d:%02d:%02d", day, hour, min);
     }
 
-    private List<Ship> looseList;
-    private List<Ship> liquidList;
-    private List<Ship> containerList;
-    private int fine = 0;
+    private final List<Ship> looseList;
+    private final List<Ship> liquidList;
+    private final List<Ship> containerList;
+    private long fine = 0;
     private int numberOfShips = 0;
     private int numberOfShipsInQueue = 0;
     private int numberOfCrane = 0;
@@ -161,6 +160,6 @@ public class Unloading {
     private long timeMax = 0;
     private int maxDelay = 0;
     private int allDelay = 0;
-    private int length = 0;
+    private final int length = 0;
 
 }

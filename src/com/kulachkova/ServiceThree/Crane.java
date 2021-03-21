@@ -26,7 +26,6 @@ public class Crane {
         timestamp = new Timestamp(cal.getTime().getTime());
         ship.setRealTimeEnd_(timestamp);
         work = false;
-        ship.isUploading();
         return minuteRand;
     }
 

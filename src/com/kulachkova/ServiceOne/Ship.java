@@ -3,7 +3,7 @@ package com.kulachkova.ServiceOne;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-public class Ship implements Comparable<Ship> {
+public class Ship {
 
     public Ship (String name, Timestamp timeBegin, Cargo cargo) {
         name_ = name;
@@ -36,11 +36,6 @@ public class Ship implements Comparable<Ship> {
         cal.add(Calendar.HOUR, cargo_.number_ * timeInHours);
         timestamp = new Timestamp(cal.getTime().getTime());
         return timestamp;
-    }
-
-    @Override
-    public int compareTo (Ship ship) {
-        return timeBegin_.compareTo(ship.timeBegin_);
     }
 
     public String toString () {
@@ -124,13 +119,11 @@ public class Ship implements Comparable<Ship> {
         this.realTimeBegin_ = realTimeBegin_;
     }
 
-    public void isUploading()
-    {
-        uploading = true;
+    public void isUploading (boolean uploading) {
+        this.uploading = uploading;
     }
 
-    public boolean getUploading()
-    {
+    public boolean getUploading () {
         return uploading;
     }
 

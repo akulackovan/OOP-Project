@@ -1,20 +1,15 @@
 package com.kulachkova.ServiceThree;
 
 import com.kulachkova.ServiceOne.Ship;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-
-import java.io.FileReader;
 import java.sql.Timestamp;
 import java.util.*;
-
 
 public class ArrivalOfShips {
 
     public ArrivalOfShips (List<Ship> ships) {
-        loose = new ArrayList<Ship>();
-        liquid = new ArrayList<Ship>();
-        container = new ArrayList<Ship>();
+        loose = new ArrayList<>();
+        liquid = new ArrayList<>();
+        container = new ArrayList<>();
         read(ships);
         loose.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         liquid.sort(Comparator.comparing(Ship::getRealTimeArrival_));

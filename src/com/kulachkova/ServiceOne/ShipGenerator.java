@@ -1,10 +1,7 @@
 package com.kulachkova.ServiceOne;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ShipGenerator {
 
@@ -19,7 +16,7 @@ public class ShipGenerator {
                 System.out.println(e);
             }
         }
-        Collections.sort(ships);
+        ships.sort(Comparator.comparing(Ship::getTimeBegin_));
         System.out.println(ships);
     }
 
