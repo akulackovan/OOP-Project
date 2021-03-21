@@ -10,7 +10,7 @@ import java.util.List;
 public class JavaJson {
 
     public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(50);
+        ShipGenerator ship = new ShipGenerator(20);
         return ship.getShips();
     }
 
