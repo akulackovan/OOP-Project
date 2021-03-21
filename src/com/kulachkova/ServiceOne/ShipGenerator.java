@@ -34,7 +34,7 @@ public class ShipGenerator {
     }
 
     public Ship.Cargo CreateCargo () throws Exception {
-        String[] nameOfType = new String[]{"loose", "liquid", "container"};
+        final String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = "";
         switch ((int) (Math.random() * 3)) {
             case 0 -> {
@@ -55,11 +55,11 @@ public class ShipGenerator {
     }
 
     private Ship CreateShip () throws Exception {
-        String[] nameOfShips = new String[]{"Alexandria", "Blue", "Aurora", "Gotha", "Grossadler", "Hawksub",
+        final String[] nameOfShips = new String[]{"Alexandria", "Blue", "Aurora", "Gotha", "Grossadler", "Hawksub",
                 "Sea Queen", "Vulkan", "Empress", "Titanic", "Lenin", "Varyag", "Bismark", "Bebop", "Colossan", "Inferno",
                 "St. George", "Valhalla", "Stand. Victoria", "Calypso", "Demetor"};
-        long rangebegin = Timestamp.valueOf("2021-04-01 00:00:00").getTime();
-        long rangeend = Timestamp.valueOf("2021-04-30 00:59:00").getTime();
+        final long rangebegin = Timestamp.valueOf("2021-04-01 00:00:00").getTime();
+        final long rangeend = Timestamp.valueOf("2021-04-30 00:59:00").getTime();
         Timestamp timeBegin = new Timestamp(rangebegin + (long) (Math.random() * (rangeend - rangebegin + 1)));
         Random random = new Random();
         return new Ship(nameOfShips[random.nextInt(nameOfShips.length)], timeBegin, CreateCargo());

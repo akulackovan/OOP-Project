@@ -15,16 +15,6 @@ public class Ship {
         uploading = false;
     }
 
-    public Ship (String name, Timestamp timeBegin, Timestamp timeEnd, String nameOfCargo, int numberOfCargo) {
-        name_ = name;
-        cargo_ = new Cargo(nameOfCargo, numberOfCargo);
-        timeBegin_ = timeBegin;
-        timeEnd_ = timeEnd;
-        fine_ = 0;
-        waitTime_ = "00:00:00";
-        uploading = false;
-    }
-
     public Timestamp stay (Timestamp timestamp) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());

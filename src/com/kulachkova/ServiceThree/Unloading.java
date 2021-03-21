@@ -15,13 +15,14 @@ public class Unloading {
         looseList = arrivalOfShips.getLoose();
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < looseList.size(); i++) {
             workCrane(typeOfCargo.LOOSE, looseList);
         }
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < liquidList.size(); i++) {
+
             workCrane(typeOfCargo.LIQUID, liquidList);
         }
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < containerList.size(); i++) {
             workCrane(typeOfCargo.CONTAINER, containerList);
         }
     }
@@ -55,7 +56,6 @@ public class Unloading {
                         }
                         allDelay += delay;
                         fine += ships.get(i).getFine_();
-                        //print(ships.get(i));
                     }
                     last = i;
                 }
@@ -76,19 +76,10 @@ public class Unloading {
         return i;
     }
 
-    public void print (Ship ship) {
-        System.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
-                ship.getName_() + "\nTime arrive real " + ship.getRealTimeArrival_() +
-                "\nType " + ship.getTypeOfCargo() + "\nNeed arrival " + ship.getTimeBegin_() +
-                "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end real " + ship.getRealTimeEnd_() +
-                "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(ship) +
-                "\nFine " + ship.getFine_() + "\nTime end  " + ship.getTimeEnd_());
-    }
-
     public void getResult () {
         List<Ship> ships = getListAll();
-        for (int i = 0; i < ships.size(); i++) {
-            print(ships.get(i));
+        for (Ship ship : ships) {
+            print(ship);
         }
         fine += numberOfCrane * 30000;
         System.out.println("\n\n===========================================================\n       RESULT");
@@ -103,6 +94,15 @@ public class Unloading {
         if (numberOfShipsInQueue == 0) {
             numberOfShipsInQueue = 1;
         }
+    }
+
+    public void print (Ship ship) {
+        System.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
+                ship.getName_() + "\nTime arrive real " + ship.getRealTimeArrival_() +
+                "\nType " + ship.getTypeOfCargo() + "\nNeed arrival " + ship.getTimeBegin_() +
+                "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end real " + ship.getRealTimeEnd_() +
+                "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(ship) +
+                "\nFine " + ship.getFine_() + "\nTime end  " + ship.getTimeEnd_());
     }
 
     public void queue (Ship shipFirst, Ship shipSecond) {
@@ -172,6 +172,5 @@ public class Unloading {
     private long timeMax = 0;
     private int maxDelay = 0;
     private int allDelay = 0;
-    private final int length = 0;
 
 }

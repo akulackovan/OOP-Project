@@ -38,6 +38,4 @@ public class JavaJson {
             System.out.println(e);
         }
     }
-
-
 }
