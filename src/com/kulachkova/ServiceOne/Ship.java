@@ -5,6 +5,19 @@ import java.util.Calendar;
 
 public class Ship {
 
+    private String name_;
+    private Timestamp timeEnd_;
+    private Timestamp realTimeEnd_;
+    private Timestamp timeBegin_;
+    private Timestamp realTimeArrival_;
+    private Timestamp realTimeBegin_;
+    private String waitTime_;
+    private Cargo cargo_;
+    private long fine_;
+    private boolean uploading;
+    private int delay_;
+
+
     public Ship (String name, Timestamp timeBegin, Cargo cargo) {
         name_ = name;
         cargo_ = cargo;
@@ -121,7 +134,19 @@ public class Ship {
         return uploading;
     }
 
+    public int getDelay_ () {
+        return delay_;
+    }
+
+    public void setDelay_ (int delay_) {
+        this.delay_ = delay_;
+    }
+
     public static class Cargo {
+
+        private String name_;
+        private int number_;
+        private typeOfCargo type_;
 
         public Cargo (String name, int number) {
             name_ = name;
@@ -136,20 +161,6 @@ public class Ship {
                 case "container" -> type_ = typeOfCargo.CONTAINER;
             }
         }
-
-        private String name_;
-        private int number_;
-        private typeOfCargo type_;
     }
 
-    private String name_;
-    private Timestamp timeEnd_;
-    private Timestamp realTimeEnd_;
-    private Timestamp timeBegin_;
-    private Timestamp realTimeArrival_;
-    private Timestamp realTimeBegin_;
-    private String waitTime_;
-    private Cargo cargo_;
-    private long fine_;
-    private boolean uploading;
 }

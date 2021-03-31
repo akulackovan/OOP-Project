@@ -1,6 +1,8 @@
 package com.kulachkova.ServiceThree;
 
 import com.kulachkova.ServiceOne.Ship;
+import org.w3c.dom.UserDataHandler;
+
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -52,6 +54,7 @@ public class ArrivalOfShips {
         timestamp = new Timestamp(cal.getTime().getTime());
         ship.setRealTimeArrival_(timestamp);
         ship.setRealTimeBegin_(timestamp);
+        ship.setDelay_((int) (Math.random() * 1440));
     }
 
     private List<Ship> loose;

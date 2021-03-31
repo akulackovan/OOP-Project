@@ -3,10 +3,12 @@ package com.kulachkova.ServiceThree;
 import com.kulachkova.ServiceOne.Ship;
 import com.kulachkova.ServiceOne.typeOfCargo;
 
+import javax.swing.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.Phaser;
 
 public class Unloading {
 
@@ -15,19 +17,10 @@ public class Unloading {
         looseList = arrivalOfShips.getLoose();
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
-        lastLooseShip = 0;
-        lastLiquidShip = 0;
-        lastContainerShip = 0;
-        for (int i = 0; i < 1; i++) {
-            workCrane(typeOfCargo.LOOSE, looseList);
-        }
-        for (int i = 0; i < 1; i++) {
-
-            workCrane(typeOfCargo.LIQUID, liquidList);
-        }
-        for (int i = 0; i < 1; i++) {
-            workCrane(typeOfCargo.CONTAINER, containerList);
-        }
+        Phaser phaser = new Phaser(3);
+        new Crane(phaser, typeOfCargo.LOOSE, looseList);
+        new Crane(phaser, typeOfCargo.LIQUID, liquidList);
+        new Crane(phaser, typeOfCargo.CONTAINER, containerList);
     }
 
     public List<Ship> getListAll () {
@@ -38,50 +31,8 @@ public class Unloading {
         return all;
     }
 
-    public void workCrane (typeOfCargo type, List<Ship> ships) {
-        new Thread(new Runnable() {
-            @Override
-            public void run () {
-                int last = -1;
-                Crane crane = new Crane(type);
-                synchronized (Unloading.class) {
-                    numberOfCrane += 1;
-                    fine += 30000;
-                }
-                for (int j = 0; j < ships.size(); j++) {
-                    int i = findShip(ships, last);
-                    if (i == ships.size()) break;
-                    int delay = crane.unloading(ships.get(i));
-                    ships.get(i).setFine_();
-                    synchronized (Unloading.class) {
-                        numberOfShips++;
-                        if (delay > maxDelay) {
-                            maxDelay = delay;
-                        }
-                        allDelay += delay;
-                        fine += ships.get(i).getFine_();
-                    }
-                    last = i;
-                }
-            }
-        }).start();
-    }
-
-    private synchronized int findShip (List<Ship> ships, int last) {
-        int i = 0;
-        while (i != ships.size() && ships.get(i).getUploading()) {
-            i++;
-        }
-        if (i == ships.size()) return i;
-        ships.get(i).isUploading(true);
-        if (last != -1) {
-            queue(ships.get(last), ships.get(i));
-        }
-        return i;
-    }
-
     public void getResult () {
-        List<Ship> ships = getListAll();
+        /*List<Ship> ships = getListAll();
         for (Ship ship : ships) {
             print(ship);
         }
@@ -93,49 +44,19 @@ public class Unloading {
         System.out.println("Time max " + convertTime(timeMax));
         System.out.println("Time min " + convertTime(timeMin));
         System.out.println("All fine " + fine);
-        System.out.println("Number Of Crane " + numberOfCrane);
-        if (numberOfShipsInQueue == 0) {
-            numberOfShipsInQueue = 1;
-        }
+        System.out.println("Number Of Crane " + numberOfCrane);*/
     }
 
     public void print (Ship ship) {
-        System.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
+        /*.out.println("==========================================\nShip №" + numberOfShips + "\nName " +
                 ship.getName_() + "\nTime arrive real " + ship.getRealTimeArrival_() +
                 "\nType " + ship.getTypeOfCargo() + "\nNeed arrival " + ship.getTimeBegin_() +
                 "\nTime begin unloading " + ship.getRealTimeBegin_() + "\nTime end real " + ship.getRealTimeEnd_() +
                 "\nWait " + ship.getWaitTime_() + "\nTime uploading " + timeUploading(ship) +
-                "\nFine " + ship.getFine_() + "\nTime end  " + ship.getTimeEnd_());
+                "\nFine " + ship.getFine_() + "\nTime end  " + ship.getTimeEnd_());*/
     }
 
-    public void queue (Ship shipFirst, Ship shipSecond) {
-        Timestamp first = shipFirst.getRealTimeEnd_();
-        Timestamp second = shipSecond.getRealTimeBegin_();
-        long milliseconds = second.getTime() - first.getTime();
-        if (milliseconds < 0) {
-            milliseconds *= -1;
-            int minute = (int) (milliseconds / 1000 / 60 % 60);
-            int day = (int) (milliseconds / (24 * 60 * 60 * 1000));
-            int hour = (int) (milliseconds / 1000 / 3600 % 60);
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(second.getTime());
-            cal.add(Calendar.MINUTE, Math.toIntExact(minute));
-            cal.add(Calendar.HOUR, Math.toIntExact(hour));
-            cal.add(Calendar.DAY_OF_YEAR, Math.toIntExact(day));
-            synchronized (Unloading.class) {
-                if (milliseconds < timeMin || timeMin == 0) {
-                    timeMin = milliseconds;
-                }
-                if (milliseconds > timeMax) {
-                    timeMax = milliseconds;
-                }
-                time += milliseconds;
-            }
-            second = new Timestamp(cal.getTime().getTime());
-            shipSecond.setWaitTime_(convertTime(milliseconds));
-        }
-        shipSecond.setRealTimeBegin_(second);
-    }
+
 
     public String timeUploading (Ship ship) {
         Timestamp need = ship.getRealTimeBegin_();
@@ -154,9 +75,6 @@ public class Unloading {
     private List<Ship> looseList;
     private List<Ship> liquidList;
     private List<Ship> containerList;
-    private int lastLooseShip;
-    private int lastLiquidShip;
-    private int lastContainerShip;
     private long fine = 0;
     private int numberOfShips = 0;
     private int numberOfShipsInQueue = 0;
