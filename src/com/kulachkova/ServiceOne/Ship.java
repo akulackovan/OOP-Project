@@ -73,12 +73,16 @@ public class Ship {
         this.realTimeArrival_ = realTimeArrival_;
     }
 
-    public int getFine_ () {
+    public long getFine_ () {
         return fine_;
     }
 
-    public void setFine_ (int fine_) {
-        this.fine_ = fine_;
+    public void setFine_ () {
+        long milliseconds = timeEnd_.getTime() - realTimeEnd_.getTime();
+        if (milliseconds < 0) {
+            int hour = -1 * (int) (milliseconds / 1000 / 3600);
+            fine_ = hour * 100;
+        }
     }
 
     public String getNameType () {
@@ -146,6 +150,6 @@ public class Ship {
     private Timestamp realTimeBegin_;
     private String waitTime_;
     private Cargo cargo_;
-    private int fine_;
+    private long fine_;
     private boolean uploading;
 }

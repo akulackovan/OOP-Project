@@ -10,7 +10,7 @@ import java.util.List;
 public class JavaJson {
 
     public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(20);
+        ShipGenerator ship = new ShipGenerator(100);
         return ship.getShips();
     }
 
@@ -30,7 +30,7 @@ public class JavaJson {
             jsonObject.put("Fine", ship.getFine_());
             shipJSON.put(jsonObject);
         }
-        try (FileWriter file = new FileWriter("src\\resourse\\arrivalOfShips.JSON")) {
+        try (FileWriter file = new FileWriter("src\\resource\\arrivalOfShips.JSON")) {
             file.write(shipJSON.toString());
             System.out.println("Successfully Copied JSON Object to File...");
         }

@@ -15,14 +15,17 @@ public class Unloading {
         looseList = arrivalOfShips.getLoose();
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
-        for (int i = 0; i < looseList.size(); i++) {
+        lastLooseShip = 0;
+        lastLiquidShip = 0;
+        lastContainerShip = 0;
+        for (int i = 0; i < 1; i++) {
             workCrane(typeOfCargo.LOOSE, looseList);
         }
-        for (int i = 0; i < liquidList.size(); i++) {
+        for (int i = 0; i < 1; i++) {
 
             workCrane(typeOfCargo.LIQUID, liquidList);
         }
-        for (int i = 0; i < containerList.size(); i++) {
+        for (int i = 0; i < 1; i++) {
             workCrane(typeOfCargo.CONTAINER, containerList);
         }
     }
@@ -43,12 +46,13 @@ public class Unloading {
                 Crane crane = new Crane(type);
                 synchronized (Unloading.class) {
                     numberOfCrane += 1;
+                    fine += 30000;
                 }
                 for (int j = 0; j < ships.size(); j++) {
                     int i = findShip(ships, last);
                     if (i == ships.size()) break;
                     int delay = crane.unloading(ships.get(i));
-                    setFine(ships.get(i));
+                    ships.get(i).setFine_();
                     synchronized (Unloading.class) {
                         numberOfShips++;
                         if (delay > maxDelay) {
@@ -81,7 +85,6 @@ public class Unloading {
         for (Ship ship : ships) {
             print(ship);
         }
-        fine += numberOfCrane * 30000;
         System.out.println("\n\n===========================================================\n       RESULT");
         System.out.println("Max daley " + maxDelay);
         System.out.println("Middle daley " + (allDelay / numberOfShips));
@@ -134,18 +137,6 @@ public class Unloading {
         shipSecond.setRealTimeBegin_(second);
     }
 
-    public void setFine (Ship ship) {
-        Timestamp need = ship.getTimeEnd_();
-        Timestamp read = ship.getRealTimeEnd_();
-        long milliseconds = read.getTime() - need.getTime();
-        if (milliseconds > 0) {
-            int hour = (int) (milliseconds / 1000 / 3600 % 60);
-            int day = (int) (milliseconds / (24 * 60 * 60 * 1000));
-            long fine = (hour + day) * 100;
-            ship.setFine_((int) (fine));
-        }
-    }
-
     public String timeUploading (Ship ship) {
         Timestamp need = ship.getRealTimeBegin_();
         Timestamp read = ship.getRealTimeEnd_();
@@ -155,14 +146,17 @@ public class Unloading {
 
     public String convertTime (long time) {
         int day = (int) (time / (24 * 60 * 60 * 1000));
-        int hour = (int) (time / 1000 / 3600 % 60);
+        int hour = (int) (time / 1000 / 3600 % 24);
         int min = (int) (time / 1000 / 60 % 60);
         return String.format("%02d:%02d:%02d", day, hour, min);
     }
 
-    private final List<Ship> looseList;
-    private final List<Ship> liquidList;
-    private final List<Ship> containerList;
+    private List<Ship> looseList;
+    private List<Ship> liquidList;
+    private List<Ship> containerList;
+    private int lastLooseShip;
+    private int lastLiquidShip;
+    private int lastContainerShip;
     private long fine = 0;
     private int numberOfShips = 0;
     private int numberOfShipsInQueue = 0;
