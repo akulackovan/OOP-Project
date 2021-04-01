@@ -5,6 +5,8 @@ import java.util.*;
 
 public class ShipGenerator {
 
+    private List<Ship> ships;
+
     public ShipGenerator (int number) {
         ships = new ArrayList<Ship>();
         for (int i = 0; i < number; i++) {
@@ -65,5 +67,5 @@ public class ShipGenerator {
         return new Ship(nameOfShips[random.nextInt(nameOfShips.length)], timeBegin, CreateCargo());
     }
 
-    private List<Ship> ships;
+
 }

@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class JavaJson {
 
+    private List<Ship> ships;
+
     public List<Ship> runServiceOne () {
         ShipGenerator ship = new ShipGenerator(100);
         ships = ship.getShips();
@@ -71,5 +73,5 @@ public class JavaJson {
         }
     }
 
-    List<Ship> ships;
+
 }
