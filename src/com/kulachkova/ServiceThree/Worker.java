@@ -6,16 +6,15 @@ import com.kulachkova.ServiceOne.typeOfCargo;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.Phaser;
 
 public class Worker {
 
-    List<Ship> ships;
-    typeOfCargo type;
-    int lastShip;
-    long fine = 0;
+    private List<Ship> ships;
+    private typeOfCargo type;
+    private int lastShip;
+    private long fine = 0;
 
-    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
+    public Worker (int number, List<Ship> ships, typeOfCargo type) {
         this.ships = ships;
         this.type = type;
         this.lastShip = 0;
@@ -25,8 +24,7 @@ public class Worker {
         }
     }
 
-    public long getFine()
-    {
+    public long getFine () {
         return fine;
     }
 
@@ -70,11 +68,11 @@ public class Worker {
             int hour = (int) (milliseconds / 1000 / 3600 % 60);
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(second.getTime());
-            cal.add(Calendar.MINUTE, Math.toIntExact(minute));
-            cal.add(Calendar.HOUR, Math.toIntExact(hour));
-            cal.add(Calendar.DAY_OF_YEAR, Math.toIntExact(day));
+            cal.add(Calendar.MINUTE, minute);
+            cal.add(Calendar.HOUR, hour);
+            cal.add(Calendar.DAY_OF_YEAR, day);
             second = new Timestamp(cal.getTime().getTime());
-            shipSecond.setWaitTime_(convertTime(milliseconds));
+            shipSecond.setWaitTime_(milliseconds);
         }
         shipSecond.setRealTimeBegin_(second);
     }

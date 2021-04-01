@@ -11,7 +11,7 @@ public class Ship {
     private Timestamp timeBegin_;
     private Timestamp realTimeArrival_;
     private Timestamp realTimeBegin_;
-    private String waitTime_;
+    private long waitTime_;
     private Cargo cargo_;
     private long fine_;
     private boolean uploading;
@@ -24,18 +24,19 @@ public class Ship {
         timeBegin_ = timeBegin;
         timeEnd_ = stay(timeBegin);
         fine_ = 0;
-        waitTime_ = "00:00:00";
+        waitTime_ = 0;
         uploading = false;
     }
 
     public Timestamp stay (Timestamp timestamp) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());
-        int timeInHours = switch (cargo_.type_) {
-            case LOOSE -> 1;
-            case LIQUID -> 2;
-            case CONTAINER -> 1;
-        };
+        int timeInHours = 0;
+        switch (cargo_.type_) {
+            case LOOSE -> timeInHours = 1;
+            case LIQUID -> timeInHours = 2;
+            case CONTAINER -> timeInHours = 3;
+        }
         cal.add(Calendar.HOUR, cargo_.number_ * timeInHours);
         timestamp = new Timestamp(cal.getTime().getTime());
         return timestamp;
@@ -43,7 +44,20 @@ public class Ship {
 
     public String toString () {
         return "Name: " + name_ + "\nCargo type: " + cargo_.name_ + "\nCargo number: " + cargo_.number_ + "\nTime arrival: "
-                + timeBegin_ + "\nTime departure: " + timeEnd_ + "\nWait: " + waitTime_;
+                + timeBegin_ + "\nTime departure: " + timeEnd_;
+    }
+
+    public String getUploadingTime () {
+        int timeInHours = 0;
+        switch (cargo_.type_) {
+            case LOOSE -> timeInHours = 1;
+            case LIQUID -> timeInHours = 2;
+            case CONTAINER -> timeInHours = 3;
+        }
+        int time = cargo_.number_ * timeInHours;
+        int day = (int) (time / (24));
+        int hour = (int) (time % 24);
+        return String.format("%02d:%02d:00", day, hour);
     }
 
     public String getName_ () {
@@ -110,11 +124,19 @@ public class Ship {
         return cargo_.type_;
     }
 
-    public String getWaitTime_ () {
+    public long getWaitTime_ () {
         return waitTime_;
     }
 
-    public void setWaitTime_ (String waitTime_) {
+    public String getWaitString () {
+        long time = waitTime_;
+        int minute = (int) (time / 1000 / 60 % 60);
+        int day = (int) (time / (24 * 60 * 60 * 1000));
+        int hour = (int) (time / 1000 / 3600 % 60);
+        return String.format("%02d:%02d:%02d", day, hour, minute);
+    }
+
+    public void setWaitTime_ (long waitTime_) {
         this.waitTime_ = waitTime_;
     }
 

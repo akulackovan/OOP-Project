@@ -4,10 +4,8 @@ import com.kulachkova.ServiceOne.*;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.List;
-import java.util.concurrent.Phaser;
 
-class Crane extends Thread {
+class Crane {
 
     private int powerInHour = 0;
 

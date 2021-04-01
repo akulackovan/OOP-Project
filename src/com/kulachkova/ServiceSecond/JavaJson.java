@@ -2,6 +2,7 @@ package com.kulachkova.ServiceSecond;
 
 import com.kulachkova.ServiceOne.Ship;
 import com.kulachkova.ServiceOne.ShipGenerator;
+import com.kulachkova.ServiceThree.Unloading;
 import org.json.*;
 
 import java.io.FileWriter;
@@ -48,7 +49,8 @@ public class JavaJson {
         }
     }
 
-    public void write (List<Ship> ships) {
+    public void write (Unloading unloading) throws InterruptedException {
+        List<Ship> ships = unloading.getListAll();
         JSONArray shipJSON = new JSONArray();
         for (Ship ship : ships) {
             JSONObject jsonObject = new JSONObject();
@@ -64,8 +66,18 @@ public class JavaJson {
             jsonObject.put("Fine", ship.getFine_());
             shipJSON.put(jsonObject);
         }
+        JSONObject report = new JSONObject();
+        report.put("Fine", unloading.getFine());
+        report.put("All Delay", unloading.getAllDelay());
+        report.put("Max Delay", unloading.getMaxDelay());
+        report.put("Number Of Crane Container", unloading.getNumberOfCraneContainer());
+        report.put("Number Of Crane Liquid", unloading.getNumberOfCraneLiquid());
+        report.put("Number Of Crane Loose", unloading.getNumberOfCraneLoose());
+        report.put("Number Of Ships", unloading.getNumberOfShips());
+        report.put("Time Wait", unloading.getTimeWait());
         try (FileWriter file = new FileWriter("src\\resource\\arrivalOfShips.JSON")) {
             file.write(shipJSON.toString());
+            file.write(report.toString());
             System.out.println("Successfully Copied JSON Object to File...");
         }
         catch (Exception e) {

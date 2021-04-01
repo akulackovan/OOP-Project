@@ -3,28 +3,23 @@ package com.kulachkova.ServiceThree;
 import com.kulachkova.ServiceOne.Ship;
 import com.kulachkova.ServiceOne.typeOfCargo;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Phaser;
 
 public class Unloading {
 
     private List<Ship> looseList;
     private List<Ship> liquidList;
     private List<Ship> containerList;
-    private long fine = 0;
+    private long fine;
     private int numberOfShips = 0;
-    private int numberOfShipsInQueue = 0;
-    private int numberOfCrane = 0;
+    private int numberOfCraneLoose;
+    private int numberOfCraneLiquid;
+    private int numberOfCraneContainer;
     private long time = 0;
-    private long timeMin = 0;
-    private long timeMax = 0;
     private int maxDelay = 0;
     private int allDelay = 0;
-
 
     public Unloading (List<Ship> ships) throws InterruptedException {
         ArrivalOfShips arrivalOfShips = new ArrivalOfShips(ships);
@@ -32,24 +27,25 @@ public class Unloading {
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
         int loose = findOptimal(typeOfCargo.LOOSE, looseList);
-        int liquid = findOptimal(typeOfCargo.LOOSE, looseList);
-        int container = findOptimal(typeOfCargo.LOOSE, looseList);
-        System.out.println(loose);
-        System.out.println(liquid);
-        System.out.println(container);
+        int liquid = findOptimal(typeOfCargo.LIQUID, liquidList);
+        int container = findOptimal(typeOfCargo.CONTAINER, containerList);
         Thread.sleep(5000);
         Worker worker = new Worker(loose, looseList, typeOfCargo.LOOSE);
         Worker worker1 = new Worker(liquid, liquidList, typeOfCargo.LIQUID);
         Worker worker2 = new Worker(container, containerList, typeOfCargo.CONTAINER);
         Thread.sleep(2000);
+        fine = worker.getFine() + worker1.getFine() + worker2.getFine() + (loose + container + liquid) * 30000;
+        numberOfCraneLoose = loose;
+        numberOfCraneLiquid = liquid;
+        numberOfCraneContainer = container;
         looseList = worker.getShips();
         liquidList = worker1.getShips();
         containerList = worker2.getShips();
         looseList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         liquidList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         containerList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
+        numberOfShips += looseList.size() + liquidList.size() + containerList.size();
     }
-
 
     public int findOptimal (typeOfCargo type, List<Ship> ships) throws InterruptedException {
         long fine = 0;
@@ -65,7 +61,6 @@ public class Unloading {
         return ships.size();
     }
 
-
     public List<Ship> getListAll () {
         List<Ship> all = new ArrayList<>();
         all.addAll(0, looseList);
@@ -74,19 +69,68 @@ public class Unloading {
         return all;
     }
 
-    public String timeUploading (Ship ship) {
-        Timestamp need = ship.getRealTimeBegin_();
-        Timestamp read = ship.getRealTimeEnd_();
-        long milliseconds = read.getTime() - need.getTime();
-        return convertTime(milliseconds);
+    public void report () {
+        List<Ship> ships = getListAll();
+        for (Ship ship : ships) {
+            System.out.println("\nName: " + ship.getName_() + "\nTime arrive: " + ship.getRealTimeArrival_()
+                    + "\nTime wait: " + ship.getWaitString() + "\nTime real begin: "
+                    + ship.getRealTimeBegin_() + "\nTime uploading: " + ship.getUploadingTime());
+        }
+        System.out.println("Number of ships: " + ships.size() + "\nAll delay: " + allDelay + "\nMax delay: "
+                + getMaxDelay() + "\nNumber of crane loose: " + numberOfCraneLoose + "\nNumber of crane liquid: "
+                + numberOfCraneLiquid + "\nNumber of crane container: " + numberOfCraneContainer + "\nFine: " + fine + "\nAverage waiting time: " + getTimeWait());
     }
 
-    public String convertTime (long time) {
+    public long getFine () {
+        return fine;
+    }
+
+    public int getNumberOfShips () {
+        return numberOfShips;
+    }
+
+    public int getNumberOfCraneLoose () {
+        return numberOfCraneLoose;
+    }
+
+    public int getNumberOfCraneLiquid () {
+        return numberOfCraneLiquid;
+    }
+
+    public int getNumberOfCraneContainer () {
+        return numberOfCraneContainer;
+    }
+
+    public int getMaxDelay () {
+        List<Ship> ships = getListAll();
+        for (Ship ship : ships) {
+            if (ship.getDelay_() > maxDelay) {
+                maxDelay = ship.getDelay_();
+            }
+        }
+        return maxDelay;
+    }
+
+    public int getAllDelay () {
+        List<Ship> ships = getListAll();
+        for (Ship ship : ships) {
+            if (ship.getDelay_() > allDelay) {
+                allDelay = ship.getDelay_();
+            }
+        }
+        return allDelay / ships.size();
+    }
+
+    public String getTimeWait()
+    {
+        List<Ship> ships = getListAll();
+        for (Ship ship : ships) {
+            time += ship.getWaitTime_();
+        }
+        time /= ships.size();
+        int minute = (int) (time / 1000 / 60 % 60);
         int day = (int) (time / (24 * 60 * 60 * 1000));
-        int hour = (int) (time / 1000 / 3600 % 24);
-        int min = (int) (time / 1000 / 60 % 60);
-        return String.format("%02d:%02d:%02d", day, hour, min);
+        int hour = (int) (time / 1000 / 3600 % 60);
+        return String.format("%02d:%02d:%02d", day, hour, minute);
     }
-
-
 }
