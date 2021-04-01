@@ -9,7 +9,7 @@ public class Main {
         JavaJson jsonJava = new JavaJson();
         System.out.println("\n\n============================================================\n                   UPLOADING");
         Unloading unloading = new Unloading(jsonJava.runServiceOne());
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         jsonJava.write(unloading.getListAll());
     }
 }

@@ -31,10 +31,17 @@ public class Unloading {
         looseList = arrivalOfShips.getLoose();
         liquidList = arrivalOfShips.getLiquid();
         containerList = arrivalOfShips.getContainer();
-        Worker worker = new Worker(looseList, typeOfCargo.LOOSE);
-        Worker worker1 = new Worker(liquidList, typeOfCargo.LIQUID);
-        Worker worker2 = new Worker(containerList, typeOfCargo.CONTAINER);
-        Thread.sleep(1000);
+        int loose = findOptimal(typeOfCargo.LOOSE, looseList);
+        int liquid = findOptimal(typeOfCargo.LOOSE, looseList);
+        int container = findOptimal(typeOfCargo.LOOSE, looseList);
+        System.out.println(loose);
+        System.out.println(liquid);
+        System.out.println(container);
+        Thread.sleep(5000);
+        Worker worker = new Worker(loose, looseList, typeOfCargo.LOOSE);
+        Worker worker1 = new Worker(liquid, liquidList, typeOfCargo.LIQUID);
+        Worker worker2 = new Worker(container, containerList, typeOfCargo.CONTAINER);
+        Thread.sleep(2000);
         looseList = worker.getShips();
         liquidList = worker1.getShips();
         containerList = worker2.getShips();
@@ -42,6 +49,22 @@ public class Unloading {
         liquidList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         containerList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
     }
+
+
+    public int findOptimal (typeOfCargo type, List<Ship> ships) throws InterruptedException {
+        long fine = 0;
+        for (int i = 1; i < ships.size(); i++) {
+            Worker worker = new Worker(i, ships, type);
+            Thread.sleep(500);
+            if (i == 1) {
+                fine = worker.getFine();
+            } else if (fine < worker.getFine()) {
+                return i - 1;
+            }
+        }
+        return ships.size();
+    }
+
 
     public List<Ship> getListAll () {
         List<Ship> all = new ArrayList<>();
@@ -64,7 +87,6 @@ public class Unloading {
         int min = (int) (time / 1000 / 60 % 60);
         return String.format("%02d:%02d:%02d", day, hour, min);
     }
-
 
 
 }

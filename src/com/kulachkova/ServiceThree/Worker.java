@@ -13,14 +13,21 @@ public class Worker {
     List<Ship> ships;
     typeOfCargo type;
     int lastShip;
+    long fine = 0;
 
-    public Worker (List<Ship> ships, typeOfCargo type) {
+    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
         this.ships = ships;
         this.type = type;
         this.lastShip = 0;
-        for (int i = 0; i < ships.size(); i++) {
+        fine = 30000 * number;
+        for (int i = 0; i < number; i++) {
             work();
         }
+    }
+
+    public long getFine()
+    {
+        return fine;
     }
 
     public void work () {
@@ -29,24 +36,24 @@ public class Worker {
             public void run () {
                 Crane crane = new Crane(type);
                 int last = -1;
-                for (int i = 0;  i < ships.size();) {
+                for (int i = 0; i < ships.size(); ) {
                     i = lastShip;
-                    if (i >= ships.size())
-                    {
+                    if (i >= ships.size()) {
                         return;
                     }
-                    synchronized (Worker.class)
-                    {
+                    synchronized (Worker.class) {
                         lastShip++;
                     }
-                    if (last != -1)
-                    {
+                    if (last != -1) {
                         queue(ships.get(last), ships.get(i));
                     }
                     if (i >= ships.size()) break;
                     crane.unloading(ships.get(i));
                     ships.get(i).setFine_();
                     last = i;
+                    synchronized (Worker.class) {
+                        fine += ships.get(i).getFine_();
+                    }
                 }
             }
         }).start();
