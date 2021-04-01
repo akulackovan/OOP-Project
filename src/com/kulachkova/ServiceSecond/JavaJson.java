@@ -5,13 +5,45 @@ import com.kulachkova.ServiceOne.ShipGenerator;
 import org.json.*;
 
 import java.io.FileWriter;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Scanner;
 
 public class JavaJson {
 
     public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(10);
-        return ship.getShips();
+        ShipGenerator ship = new ShipGenerator(100);
+        ships = ship.getShips();
+        write();
+        return ships;
+    }
+
+    public void write () {
+        while (true)
+        {
+            System.out.println("Add ship? Y/N\n");
+            Scanner in = new Scanner(System.in);
+            String string = in.next();
+            if (!string.equals("Y")) {
+                return;
+            }
+            System.out.print("Name: ");
+            string = in.next();
+            System.out.print("Cargo type(loose, liquid, container): ");
+            String type = in.next();
+            System.out.print("Cargo number: ");
+            int number = in.nextInt();
+            System.out.print("Day of begin: ");
+            int day = in.nextInt();
+            System.out.print("Hour of begin: ");
+            int hour = in.nextInt();
+            System.out.print("Minute of begin: ");
+            int minute = in.nextInt();
+            String time = "2021-04-" + day + " " + hour + ":" + minute + ":" + "00.000";
+            Timestamp timestamp = Timestamp.valueOf(time);
+            Ship ship = new Ship(string, timestamp, new Ship.Cargo(type, number));
+            ships.add(ship);
+        }
     }
 
     public void write (List<Ship> ships) {
@@ -38,4 +70,6 @@ public class JavaJson {
             System.out.println(e);
         }
     }
+
+    List<Ship> ships;
 }
