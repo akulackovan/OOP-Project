@@ -11,6 +11,5 @@ public class Main {
         Unloading unloading = new Unloading(jsonJava.runServiceOne());
         Thread.sleep(5000);
         jsonJava.write(unloading.getListAll());
-        unloading.getResult();
     }
 }

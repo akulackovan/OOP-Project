@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Phaser;
 
 public class Worker {
+
     List<Ship> ships;
     typeOfCargo type;
     int lastShip;
@@ -27,39 +28,33 @@ public class Worker {
             @Override
             public void run () {
                 Crane crane = new Crane(type);
-                int last = 0;
-                for (int j = 0; j < ships.size(); j++) {
-                    int i = lastShip;
+                int last = -1;
+                for (int i = 0;  i < ships.size();) {
+                    i = lastShip;
+                    if (i >= ships.size())
+                    {
+                        return;
+                    }
                     synchronized (Worker.class)
                     {
                         lastShip++;
                     }
+                    if (last != -1)
+                    {
+                        queue(ships.get(last), ships.get(i));
+                    }
                     if (i >= ships.size()) break;
                     crane.unloading(ships.get(i));
                     ships.get(i).setFine_();
-                    System.out.println(crane.getName() + " " + i);
-                    System.out.println(ships.get(i));
+                    last = i;
                 }
             }
         }).start();
     }
 
-    private synchronized int findShip (int last) {
-        int i = 0;
-        while (i != ships.size() && ships.get(i).getUploading()) {
-            i++;
-        }
-        if (i == ships.size()) return i;
-        ships.get(i).isUploading(true);
-        if (last != -1) {
-            queue(ships.get(last), ships.get(i));
-        }
-        return i;
-    }
-
     public synchronized void queue (Ship shipFirst, Ship shipSecond) {
         Timestamp first = shipFirst.getRealTimeEnd_();
-        Timestamp second = shipSecond.getRealTimeBegin_();
+        Timestamp second = shipSecond.getRealTimeArrival_();
         long milliseconds = second.getTime() - first.getTime();
         if (milliseconds < 0) {
             milliseconds *= -1;
@@ -85,4 +80,7 @@ public class Worker {
     }
 
 
+    public List<Ship> getShips () {
+        return ships;
+    }
 }

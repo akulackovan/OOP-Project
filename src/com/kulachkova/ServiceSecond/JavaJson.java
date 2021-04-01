@@ -14,7 +14,7 @@ public class JavaJson {
     private List<Ship> ships;
 
     public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(100);
+        ShipGenerator ship = new ShipGenerator(30);
         ships = ship.getShips();
         write();
         return ships;
