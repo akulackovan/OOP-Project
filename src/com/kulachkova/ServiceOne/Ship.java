@@ -43,7 +43,7 @@ public class Ship {
 
     public String toString () {
         return "Name: " + name_ + "\nCargo type: " + cargo_.name_ + "\nCargo number: " + cargo_.number_ + "\nTime arrival: "
-                + timeBegin_ + "\nTime departure: " + timeEnd_;
+                + timeBegin_ + "\nTime departure: " + timeEnd_ + "\nWait: " + waitTime_;
     }
 
     public String getName_ () {

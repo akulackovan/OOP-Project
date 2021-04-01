@@ -8,6 +8,10 @@ import java.util.*;
 
 public class ArrivalOfShips {
 
+    private List<Ship> loose;
+    private List<Ship> liquid;
+    private List<Ship> container;
+
     public ArrivalOfShips (List<Ship> ships) {
         loose = new ArrayList<>();
         liquid = new ArrayList<>();
@@ -57,7 +61,4 @@ public class ArrivalOfShips {
         ship.setDelay_((int) (Math.random() * 1440));
     }
 
-    private List<Ship> loose;
-    private List<Ship> liquid;
-    private List<Ship> container;
 }
