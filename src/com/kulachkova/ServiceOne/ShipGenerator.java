@@ -37,21 +37,7 @@ public class ShipGenerator {
 
     public Ship.Cargo CreateCargo () throws Exception {
         final String[] nameOfType = new String[]{"loose", "liquid", "container"};
-        String name = "";
-        switch ((int) (Math.random() * 3)) {
-            case 0 -> {
-                name = nameOfType[0];
-            }
-            case 1 -> {
-                name = nameOfType[1];
-            }
-            case 2 -> {
-                name = nameOfType[2];
-            }
-            default -> {
-                throw new Exception();
-            }
-        }
+        String name = nameOfType[(int) (Math.random() * 3)];
         int number = (int) (Math.random() * 200) + 1;
         return new Ship.Cargo(name, number);
     }
@@ -66,6 +52,5 @@ public class ShipGenerator {
         Random random = new Random();
         return new Ship(nameOfShips[random.nextInt(nameOfShips.length)], timeBegin, CreateCargo());
     }
-
 
 }

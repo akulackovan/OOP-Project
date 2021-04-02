@@ -12,7 +12,7 @@ public class ArrivalOfShips {
     private List<Ship> liquid;
     private List<Ship> container;
 
-    public ArrivalOfShips (List<Ship> ships){
+    public ArrivalOfShips (List<Ship> ships) {
         loose = new ArrayList<>();
         liquid = new ArrayList<>();
         container = new ArrayList<>();
