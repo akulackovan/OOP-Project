@@ -22,8 +22,7 @@ public class JavaJson {
     }
 
     public void write () {
-        while (true)
-        {
+        while (true) {
             System.out.println("Add ship? Y/N\n");
             Scanner in = new Scanner(System.in);
             String string = in.next();
@@ -49,7 +48,7 @@ public class JavaJson {
         }
     }
 
-    public void write (Unloading unloading) throws InterruptedException {
+    public void write (Unloading unloading) {
         List<Ship> ships = unloading.getListAll();
         JSONArray shipJSON = new JSONArray();
         for (Ship ship : ships) {

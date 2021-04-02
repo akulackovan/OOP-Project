@@ -30,7 +30,7 @@ public class ShipGenerator {
     public String toString () {
         StringBuilder string = new StringBuilder("Schedule of ships\n");
         for (int i = 0; i < ships.size(); i++) {
-            string.append("Ship №").append(i + 1).append("\n").append(String.valueOf(ships.get(i))).append("\n\n");
+            string.append("Ship №").append(i + 1).append("\n").append(ships.get(i)).append("\n\n");
         }
         return string.toString();
     }

@@ -121,8 +121,7 @@ public class Unloading {
         return allDelay / ships.size();
     }
 
-    public String getTimeWait()
-    {
+    public String getTimeWait () {
         List<Ship> ships = getListAll();
         for (Ship ship : ships) {
             time += ship.getWaitTime_();

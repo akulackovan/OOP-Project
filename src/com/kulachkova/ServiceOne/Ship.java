@@ -14,9 +14,7 @@ public class Ship {
     private long waitTime_;
     private Cargo cargo_;
     private long fine_;
-    private boolean uploading;
     private int delay_;
-
 
     public Ship (String name, Timestamp timeBegin, Cargo cargo) {
         name_ = name;
@@ -25,18 +23,12 @@ public class Ship {
         timeEnd_ = stay(timeBegin);
         fine_ = 0;
         waitTime_ = 0;
-        uploading = false;
     }
 
     public Timestamp stay (Timestamp timestamp) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());
-        int timeInHours = 0;
-        switch (cargo_.type_) {
-            case LOOSE -> timeInHours = 1;
-            case LIQUID -> timeInHours = 2;
-            case CONTAINER -> timeInHours = 3;
-        }
+        int timeInHours = cargo_.type_.getHour();
         cal.add(Calendar.HOUR, cargo_.number_ * timeInHours);
         timestamp = new Timestamp(cal.getTime().getTime());
         return timestamp;
@@ -48,15 +40,10 @@ public class Ship {
     }
 
     public String getUploadingTime () {
-        int timeInHours = 0;
-        switch (cargo_.type_) {
-            case LOOSE -> timeInHours = 1;
-            case LIQUID -> timeInHours = 2;
-            case CONTAINER -> timeInHours = 3;
-        }
+        int timeInHours = cargo_.type_.getHour();
         int time = cargo_.number_ * timeInHours;
-        int day = (int) (time / (24));
-        int hour = (int) (time % 24);
+        int day = time / 24;
+        int hour = time % 24;
         return String.format("%02d:%02d:00", day, hour);
     }
 
@@ -146,14 +133,6 @@ public class Ship {
 
     public void setRealTimeBegin_ (Timestamp realTimeBegin_) {
         this.realTimeBegin_ = realTimeBegin_;
-    }
-
-    public void isUploading (boolean uploading) {
-        this.uploading = uploading;
-    }
-
-    public boolean getUploading () {
-        return uploading;
     }
 
     public int getDelay_ () {

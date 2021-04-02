@@ -7,15 +7,10 @@ import java.util.Calendar;
 
 class Crane {
 
-    private int powerInHour = 0;
+    private int powerInHour;
 
     public Crane (typeOfCargo type) {
-
-        switch (type) {
-            case LOOSE -> powerInHour = 1;
-            case LIQUID -> powerInHour = 2;
-            case CONTAINER -> powerInHour = 3;
-        }
+        powerInHour = type.getHour();
     }
 
     public void unloading (Ship ship) {

@@ -12,7 +12,7 @@ public class Worker {
     private List<Ship> ships;
     private typeOfCargo type;
     private int lastShip;
-    private long fine = 0;
+    private long fine;
 
     public Worker (int number, List<Ship> ships, typeOfCargo type) {
         this.ships = ships;
@@ -76,14 +76,6 @@ public class Worker {
         }
         shipSecond.setRealTimeBegin_(second);
     }
-
-    public String convertTime (long time) {
-        int day = (int) (time / (24 * 60 * 60 * 1000));
-        int hour = (int) (time / 1000 / 3600 % 24);
-        int min = (int) (time / 1000 / 60 % 60);
-        return String.format("%02d:%02d:%02d", day, hour, min);
-    }
-
 
     public List<Ship> getShips () {
         return ships;
