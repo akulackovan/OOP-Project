@@ -41,9 +41,6 @@ public class Unloading {
         looseList = worker.getShips();
         liquidList = worker1.getShips();
         containerList = worker2.getShips();
-        looseList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
-        liquidList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
-        containerList.sort(Comparator.comparing(Ship::getRealTimeArrival_));
         numberOfShips += looseList.size() + liquidList.size() + containerList.size();
     }
 
