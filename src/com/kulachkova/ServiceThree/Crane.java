@@ -17,7 +17,11 @@ class Crane {
         Timestamp timestamp = ship.getRealTimeBegin_();
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());
-        cal.add(Calendar.HOUR, powerInHour * ship.getNumberOfCargo());
+        int number = ship.getNumberOfCargo();
+        while (number != 0) {
+            cal.add(Calendar.HOUR, powerInHour);
+            number--;
+        }
         int minuteRand = ship.getDelay_();
         cal.add(Calendar.MINUTE, minuteRand);
         timestamp = new Timestamp(cal.getTime().getTime());

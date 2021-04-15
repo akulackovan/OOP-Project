@@ -35,7 +35,7 @@ public class ShipGenerator {
         return string.toString();
     }
 
-    public Ship.Cargo CreateCargo () throws Exception {
+    public Ship.Cargo CreateCargo () {
         final String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = nameOfType[(int) (Math.random() * 3)];
         int number = (int) (Math.random() * 200) + 1;

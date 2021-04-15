@@ -4,23 +4,31 @@ import com.kulachkova.ServiceOne.Ship;
 import com.kulachkova.ServiceOne.typeOfCargo;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class Worker {
 
-    private List<Ship> ships;
+    private ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
     private typeOfCargo type;
-    private int lastShip;
     private long fine;
+    List<Thread> threads;
 
-    public Worker (int number, List<Ship> ships, typeOfCargo type) {
-        this.ships = ships;
+    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
+        this.ships.addAll(ships);
         this.type = type;
-        this.lastShip = 0;
         fine = 30000 * number;
+        threads = new ArrayList<Thread>();
         for (int i = 0; i < number; i++) {
-            work();
+            threads.add(new Thread(work(i)));
+        }
+        for (Thread thread: threads) {
+            thread.start();
+        }
+        for (Thread thread: threads) {
+            thread.join();
         }
     }
 
@@ -28,33 +36,28 @@ public class Worker {
         return fine;
     }
 
-    public void work () {
-        new Thread(new Runnable() {
-            @Override
-            public void run () {
-                Crane crane = new Crane(type);
-                int last = -1;
-                for (int i = 0; i < ships.size(); ) {
-                    i = lastShip;
-                    if (i >= ships.size()) {
-                        return;
+    public Runnable work (int i) throws InterruptedException {
+        Crane crane = new Crane(type);
+        Runnable task = () -> {
+            Ship first = null;
+            Ship last;
+            while (!this.ships.isEmpty()) {
+                synchronized (Worker.class) {
+                    last = this.ships.poll();
+                }
+                if (last != null)
+                {
+                    if (first != null) {
+                        queue(first, last);
                     }
-                    synchronized (Worker.class) {
-                        lastShip++;
-                    }
-                    if (last != -1) {
-                        queue(ships.get(last), ships.get(i));
-                    }
-                    if (i >= ships.size()) break;
-                    crane.unloading(ships.get(i));
-                    ships.get(i).setFine_();
-                    last = i;
-                    synchronized (Worker.class) {
-                        fine += ships.get(i).getFine_();
-                    }
+                    crane.unloading(last);
+                    last.setFine_();
+                    fine += last.getFine_();
+                    first = last;
                 }
             }
-        }).start();
+        };
+        return task;
     }
 
     public synchronized void queue (Ship shipFirst, Ship shipSecond) {
@@ -78,6 +81,6 @@ public class Worker {
     }
 
     public List<Ship> getShips () {
-        return ships;
+        return (List<Ship>) ships;
     }
 }

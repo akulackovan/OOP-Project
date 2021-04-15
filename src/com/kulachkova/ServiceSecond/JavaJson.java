@@ -15,7 +15,7 @@ public class JavaJson {
     private List<Ship> ships;
 
     public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(30);
+        ShipGenerator ship = new ShipGenerator(100);
         ships = ship.getShips();
         write();
         return ships;
@@ -74,9 +74,9 @@ public class JavaJson {
         report.put("Number Of Crane Loose", unloading.getNumberOfCraneLoose());
         report.put("Number Of Ships", unloading.getNumberOfShips());
         report.put("Time Wait", unloading.getTimeWait());
+        shipJSON.put(report);
         try (FileWriter file = new FileWriter("src\\resource\\arrivalOfShips.JSON")) {
             file.write(shipJSON.toString());
-            file.write(report.toString());
             System.out.println("Successfully Copied JSON Object to File...");
         }
         catch (Exception e) {
