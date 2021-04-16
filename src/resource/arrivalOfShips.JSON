@@ -1,1 +1,214 @@
-[{"Real time end unloading":"2021-04-08 20:57:03.242","Number of cargo":110,"Name ship":"St. George","Real time begin unloading":"2021-04-03 14:59:03.242","Wait time":225288848,"Departure date":"2021-04-11 16:55:03.242","Arrival date":"2021-04-07 02:55:03.242","Real arrival date":"2021-04-01 12:25:03.242","Fine":0,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-04 02:59:52.09","Number of cargo":145,"Name ship":"Grossadler","Real time begin unloading":"2021-03-28 04:58:52.09","Wait time":0,"Departure date":"2021-04-08 20:50:52.09","Arrival date":"2021-04-02 19:50:52.09","Real arrival date":"2021-03-28 04:58:52.09","Fine":0,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-16 05:05:21.001","Number of cargo":197,"Name ship":"Vulkan","Real time begin unloading":"2021-04-07 17:33:21.001","Wait time":98622241,"Departure date":"2021-04-21 19:46:21.001","Arrival date":"2021-04-13 14:46:21.001","Real arrival date":"2021-04-07 17:33:21.001","Fine":0,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-21 17:15:27.496","Number of cargo":47,"Name ship":"Bebop","Real time begin unloading":"2021-04-19 04:57:27.496","Wait time":417381889,"Departure date":"2021-04-25 08:33:27.496","Arrival date":"2021-04-23 09:33:27.496","Real arrival date":"2021-04-19 04:57:27.496","Fine":6400,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-13 02:56:49.385","Number of cargo":79,"Name ship":"Bebop","Real time begin unloading":"2021-04-08 22:30:49.385","Wait time":813451616,"Departure date":"2021-04-09 15:58:49.385","Arrival date":"2021-04-06 08:58:49.385","Real arrival date":"2021-04-08 22:30:49.385","Fine":8200,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-26 11:57:15.363","Number of cargo":128,"Name ship":"Demetor","Real time begin unloading":"2021-04-20 23:16:15.363","Wait time":64752133,"Departure date":"2021-04-22 06:52:15.363","Arrival date":"2021-04-16 22:52:15.363","Real arrival date":"2021-04-20 23:16:15.363","Fine":10100,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-20 08:29:49.532","Number of cargo":157,"Name ship":"Vulkan","Real time begin unloading":"2021-03-31 02:50:49.532","Wait time":0,"Departure date":"2021-04-25 02:27:49.532","Arrival date":"2021-04-05 11:27:49.532","Real arrival date":"2021-03-31 02:50:49.532","Fine":0,"Type of cargo":"container"},{"Real time end unloading":"2021-04-23 11:28:11.258","Number of cargo":15,"Name ship":"Colossan","Real time begin unloading":"2021-04-20 20:29:11.258","Wait time":1632818274,"Departure date":"2021-04-05 18:37:11.258","Arrival date":"2021-04-03 21:37:11.258","Real arrival date":"2021-04-01 10:56:11.258","Fine":42400,"Type of cargo":"container"},{"Real time end unloading":"2021-05-06 11:13:36.192","Number of cargo":88,"Name ship":"St. George","Real time begin unloading":"2021-04-24 11:27:36.192","Wait time":1407695066,"Departure date":"2021-04-22 15:13:36.192","Arrival date":"2021-04-11 15:13:36.192","Real arrival date":"2021-04-07 04:26:36.192","Fine":33200,"Type of cargo":"container"},{"Real time end unloading":"2021-05-03 06:39:09.305","Number of cargo":75,"Name ship":"Blue","Real time begin unloading":"2021-04-23 11:28:09.305","Wait time":1317421953,"Departure date":"2021-04-13 09:04:09.305","Arrival date":"2021-04-04 00:04:09.305","Real arrival date":"2021-04-08 05:31:09.305","Fine":47700,"Type of cargo":"container"},{"Real time end unloading":"2021-05-10 15:09:05.684","Number of cargo":43,"Name ship":"Grossadler","Real time begin unloading":"2021-05-04 06:39:05.684","Wait time":1854543621,"Departure date":"2021-04-22 04:59:05.684","Arrival date":"2021-04-16 19:59:05.684","Real arrival date":"2021-04-11 19:30:05.684","Fine":44200,"Type of cargo":"container"},{"Real time end unloading":"2021-05-16 00:06:08.359","Number of cargo":22,"Name ship":"Aurora","Real time begin unloading":"2021-05-12 15:08:08.359","Wait time":2340837325,"Departure date":"2021-04-11 00:40:08.359","Arrival date":"2021-04-08 06:40:08.359","Real arrival date":"2021-04-13 12:55:08.359","Fine":83900,"Type of cargo":"container"},{"Real time end unloading":"2021-05-24 16:33:03.008","Number of cargo":135,"Name ship":"Vulkan","Real time begin unloading":"2021-05-07 11:13:03.008","Wait time":2263293184,"Departure date":"2021-04-26 17:19:03.008","Arrival date":"2021-04-09 20:19:03.008","Real arrival date":"2021-04-10 06:32:03.008","Fine":67100,"Type of cargo":"container"},{"Real time end unloading":"2021-05-15 18:26:54.973","Number of cargo":105,"Name ship":"Empress","Real time begin unloading":"2021-05-02 03:39:54.973","Wait time":1738754332,"Departure date":"2021-04-19 14:53:54.973","Arrival date":"2021-04-06 11:53:54.973","Real arrival date":"2021-04-12 00:40:54.973","Fine":62700,"Type of cargo":"container"},{"Real time end unloading":"2021-05-28 18:22:01.563","Number of cargo":88,"Name ship":"Lenin","Real time begin unloading":"2021-05-17 00:06:01.563","Wait time":2284206796,"Departure date":"2021-04-25 02:55:01.563","Arrival date":"2021-04-14 02:55:01.563","Real arrival date":"2021-04-19 13:36:01.563","Fine":80700,"Type of cargo":"container"},{"Real time end unloading":"2021-05-24 07:38:55.98","Number of cargo":143,"Name ship":"Grossadler","Real time begin unloading":"2021-05-06 00:37:55.98","Wait time":1311612379,"Departure date":"2021-05-13 10:44:55.98","Arrival date":"2021-04-25 13:44:55.98","Real arrival date":"2021-04-20 20:17:55.98","Fine":26000,"Type of cargo":"container"},{"Real time end unloading":"2021-06-02 05:29:32.422","Number of cargo":28,"Name ship":"Blue","Real time begin unloading":"2021-05-28 18:21:32.422","Wait time":3027929141,"Departure date":"2021-04-20 21:24:32.422","Arrival date":"2021-04-17 09:24:32.422","Real arrival date":"2021-04-23 17:16:32.422","Fine":101600,"Type of cargo":"container"},{"Real time end unloading":"2021-05-23 02:03:44.291","Number of cargo":55,"Name ship":"Colossan","Real time begin unloading":"2021-05-15 06:26:44.291","Wait time":1944130682,"Departure date":"2021-04-25 19:59:44.291","Arrival date":"2021-04-18 22:59:44.291","Real arrival date":"2021-04-23 06:24:44.291","Fine":65400,"Type of cargo":"container"},{"Real time end unloading":"2021-06-03 16:48:20.46","Number of cargo":151,"Name ship":"Colossan","Real time begin unloading":"2021-05-15 06:26:20.46","Wait time":1976974513,"Departure date":"2021-05-08 13:03:20.46","Arrival date":"2021-04-19 16:03:20.46","Real arrival date":"2021-04-22 21:17:20.46","Fine":62700,"Type of cargo":"container"},{"Real time end unloading":"2021-06-17 11:36:36.741","Number of cargo":184,"Name ship":"Bismark","Real time begin unloading":"2021-05-24 14:03:36.741","Wait time":2506447550,"Departure date":"2021-05-20 00:53:36.741","Arrival date":"2021-04-27 00:53:36.741","Real arrival date":"2021-04-24 01:49:36.741","Fine":68200,"Type of cargo":"container"},{"Real time end unloading":"2021-04-29 00:36:23.43","Number of cargo":138,"Name ship":"Titanic","Real time begin unloading":"2021-04-22 17:43:23.43","Wait time":1109331933,"Departure date":"2021-05-01 16:25:23.43","Arrival date":"2021-04-25 22:25:23.43","Real arrival date":"2021-04-22 17:43:23.43","Fine":23200,"Type of cargo":"loose"},{"Real time end unloading":"2021-05-01 15:20:37.428","Number of cargo":64,"Name ship":"Alexandria","Real time begin unloading":"2021-04-28 07:28:37.428","Wait time":61666002,"Departure date":"2021-05-01 09:36:37.428","Arrival date":"2021-04-28 17:36:37.428","Real arrival date":"2021-04-28 07:28:37.428","Fine":500,"Type of cargo":"loose"},{"Real time end unloading":"2021-05-05 20:40:53.682","Number of cargo":178,"Name ship":"Inferno","Real time begin unloading":"2021-04-27 16:30:53.682","Wait time":1181609748,"Departure date":"2021-05-04 16:28:53.682","Arrival date":"2021-04-27 06:28:53.682","Real arrival date":"2021-04-27 16:30:53.682","Fine":2800,"Type of cargo":"loose"},{"Real time end unloading":"2021-05-08 17:24:20.807","Number of cargo":152,"Name ship":"Stand. Victoria","Real time begin unloading":"2021-05-02 03:20:20.807","Wait time":265456621,"Departure date":"2021-05-03 14:01:20.807","Arrival date":"2021-04-27 06:01:20.807","Real arrival date":"2021-04-28 13:36:20.807","Fine":12300,"Type of cargo":"loose"},{"Real time end unloading":"2021-04-06 17:41:51.329","Number of cargo":14,"Name ship":"Bebop","Real time begin unloading":"2021-04-05 00:49:51.329","Wait time":0,"Departure date":"2021-04-02 11:25:51.329","Arrival date":"2021-04-01 07:25:51.329","Real arrival date":"2021-04-05 00:49:51.329","Fine":10200,"Type of cargo":"liquid"},{"Real time end unloading":"2021-04-14 14:13:22.187","Number of cargo":5,"Name ship":"St. George","Real time begin unloading":"2021-04-13 18:31:22.187","Wait time":0,"Departure date":"2021-04-08 15:39:22.187","Arrival date":"2021-04-08 05:39:22.187","Real arrival date":"2021-04-13 18:31:22.187","Fine":14200,"Type of cargo":"liquid"},{"Real time end unloading":"2021-04-30 03:58:26.262","Number of cargo":174,"Name ship":"Bismark","Real time begin unloading":"2021-04-14 20:25:26.262","Wait time":0,"Departure date":"2021-05-05 00:02:26.262","Arrival date":"2021-04-20 12:02:26.262","Real arrival date":"2021-04-14 20:25:26.262","Fine":0,"Type of cargo":"liquid"},{"Real time end unloading":"2021-04-17 19:22:35.708","Number of cargo":5,"Name ship":"Lenin","Real time begin unloading":"2021-04-16 23:59:35.708","Wait time":1137530554,"Departure date":"2021-04-19 18:10:35.708","Arrival date":"2021-04-19 08:10:35.708","Real arrival date":"2021-04-16 23:59:35.708","Fine":28100,"Type of cargo":"liquid"},{"Real time end unloading":"2021-05-07 18:18:22.96","Number of cargo":80,"Name ship":"Bebop","Real time begin unloading":"2021-04-30 15:58:22.96","Wait time":776763302,"Departure date":"2021-04-25 03:41:22.96","Arrival date":"2021-04-18 11:41:22.96","Real arrival date":"2021-04-21 04:12:22.96","Fine":30200,"Type of cargo":"liquid"},{"Real time end unloading":"2021-05-19 03:00:15.347","Number of cargo":168,"Name ship":"Colossan","Real time begin unloading":"2021-05-04 20:21:15.347","Wait time":321547613,"Departure date":"2021-05-12 13:04:15.347","Arrival date":"2021-04-28 13:04:15.347","Real arrival date":"2021-05-04 20:21:15.347","Fine":15700,"Type of cargo":"liquid"},{"Number Of Ships":30,"Number Of Crane Container":4,"Time Wait":"12:57:02","Fine":1247700,"Max Delay":1426,"All Delay":877,"Number Of Crane Liquid":1,"Number Of Crane Loose":2}]
+{
+  "Ships": [
+    {
+      "Number of cargo": 194,
+      "Name ship": "Bebop",
+      "Departure date": "2021-04-11 03:07:31.611",
+      "Arrival date": "2021-04-03 01:07:31.611",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 185,
+      "Name ship": "Vulkan",
+      "Departure date": "2021-04-13 07:28:34.494",
+      "Arrival date": "2021-04-05 14:28:34.494",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 154,
+      "Name ship": "Calypso",
+      "Departure date": "2021-04-19 21:57:37.195",
+      "Arrival date": "2021-04-07 01:57:37.195",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 79,
+      "Name ship": "Empress",
+      "Departure date": "2021-04-18 08:17:56.406",
+      "Arrival date": "2021-04-08 11:17:56.406",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 104,
+      "Name ship": "Bebop",
+      "Departure date": "2021-04-20 02:40:12.573",
+      "Arrival date": "2021-04-11 10:40:12.573",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 16,
+      "Name ship": "Vulkan",
+      "Departure date": "2021-04-16 12:21:47.678",
+      "Arrival date": "2021-04-14 12:21:47.678",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 148,
+      "Name ship": "Sea Queen",
+      "Departure date": "2021-04-28 01:48:04.969",
+      "Arrival date": "2021-04-15 17:48:04.969",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 88,
+      "Name ship": "Vulkan",
+      "Departure date": "2021-04-20 11:28:32.733",
+      "Arrival date": "2021-04-16 19:28:32.733",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 67,
+      "Name ship": "Lenin",
+      "Departure date": "2021-04-26 04:29:13.452",
+      "Arrival date": "2021-04-17 19:29:13.452",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 75,
+      "Name ship": "Varyag",
+      "Departure date": "2021-04-27 11:51:20.773",
+      "Arrival date": "2021-04-18 02:51:20.773",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 153,
+      "Name ship": "Colossan",
+      "Departure date": "2021-04-24 14:07:34.51",
+      "Arrival date": "2021-04-18 05:07:34.51",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 127,
+      "Name ship": "Inferno",
+      "Departure date": "2021-05-04 13:41:41.305",
+      "Arrival date": "2021-04-18 16:41:41.305",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 65,
+      "Name ship": "Grossadler",
+      "Departure date": "2021-04-27 06:19:28.093",
+      "Arrival date": "2021-04-19 03:19:28.093",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 115,
+      "Name ship": "Bismark",
+      "Departure date": "2021-04-29 04:23:20.051",
+      "Arrival date": "2021-04-19 14:23:20.051",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 149,
+      "Name ship": "Gotha",
+      "Departure date": "2021-05-08 15:40:47.884",
+      "Arrival date": "2021-04-20 00:40:47.884",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 142,
+      "Name ship": "St. George",
+      "Departure date": "2021-05-08 02:13:53.421",
+      "Arrival date": "2021-04-20 08:13:53.421",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 39,
+      "Name ship": "Empress",
+      "Departure date": "2021-04-23 00:41:09.854",
+      "Arrival date": "2021-04-21 09:41:09.854",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 162,
+      "Name ship": "Vulkan",
+      "Departure date": "2021-05-11 21:26:15.946",
+      "Arrival date": "2021-04-21 15:26:15.946",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 192,
+      "Name ship": "Aurora",
+      "Departure date": "2021-05-07 22:11:22.984",
+      "Arrival date": "2021-04-21 22:11:22.984",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 63,
+      "Name ship": "Colossan",
+      "Departure date": "2021-04-25 21:47:55.322",
+      "Arrival date": "2021-04-23 06:47:55.322",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 176,
+      "Name ship": "Alexandria",
+      "Departure date": "2021-05-08 09:20:41.624",
+      "Arrival date": "2021-04-23 17:20:41.624",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 65,
+      "Name ship": "Varyag",
+      "Departure date": "2021-04-29 09:57:26.716",
+      "Arrival date": "2021-04-23 23:57:26.716",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 193,
+      "Name ship": "St. George",
+      "Departure date": "2021-05-19 20:36:24.793",
+      "Arrival date": "2021-04-25 17:36:24.793",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 99,
+      "Name ship": "Varyag",
+      "Departure date": "2021-04-29 23:13:27.152",
+      "Arrival date": "2021-04-25 20:13:27.152",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 188,
+      "Name ship": "Aurora",
+      "Departure date": "2021-05-20 20:14:01.326",
+      "Arrival date": "2021-04-27 08:14:01.326",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 158,
+      "Name ship": "Sea Queen",
+      "Departure date": "2021-05-17 05:42:40.681",
+      "Arrival date": "2021-04-27 11:42:40.681",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 163,
+      "Name ship": "Varyag",
+      "Departure date": "2021-05-11 03:57:41.267",
+      "Arrival date": "2021-04-27 13:57:41.267",
+      "Type of cargo": "liquid"
+    },
+    {
+      "Number of cargo": 113,
+      "Name ship": "Lenin",
+      "Departure date": "2021-05-03 16:46:27.138",
+      "Arrival date": "2021-04-28 23:46:27.138",
+      "Type of cargo": "loose"
+    },
+    {
+      "Number of cargo": 127,
+      "Name ship": "Titanic",
+      "Departure date": "2021-05-15 06:15:11.05",
+      "Arrival date": "2021-04-29 09:15:11.05",
+      "Type of cargo": "container"
+    },
+    {
+      "Number of cargo": 35,
+      "Name ship": "Bebop",
+      "Departure date": "2021-04-30 22:08:01.548",
+      "Arrival date": "2021-04-29 11:08:01.548",
+      "Type of cargo": "loose"
+    }
+  ]
+}
