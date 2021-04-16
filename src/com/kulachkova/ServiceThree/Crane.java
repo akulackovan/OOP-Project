@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 class Crane {
 
-    private int powerInHour;
+    private final int powerInHour;
 
     public Crane (typeOfCargo type) {
         powerInHour = type.getHour();

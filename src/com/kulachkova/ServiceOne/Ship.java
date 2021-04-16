@@ -12,17 +12,17 @@ public class Ship {
     private Timestamp realTimeArrival_;
     private Timestamp realTimeBegin_;
     private long waitTime_;
-    private Cargo cargo_;
+    private final Cargo cargo_;
     private long fine_;
     private int delay_;
 
     public Ship (String name, Timestamp timeBegin, Cargo cargo) {
-        name_ = name;
-        cargo_ = cargo;
-        timeBegin_ = timeBegin;
-        timeEnd_ = stay(timeBegin);
-        fine_ = 0;
-        waitTime_ = 0;
+        this.name_ = name;
+        this.cargo_ = cargo;
+        this.timeBegin_ = timeBegin;
+        this.timeEnd_ = stay(timeBegin);
+        this.fine_ = 0;
+        this.waitTime_ = 0;
     }
 
     public Timestamp stay (Timestamp timestamp) {
@@ -145,14 +145,14 @@ public class Ship {
 
     public static class Cargo {
 
-        private String name_;
-        private int number_;
+        private final String name_;
+        private final int number_;
         private typeOfCargo type_;
 
         public Cargo (String name, int number) {
-            name_ = name;
+            this.name_ = name;
             setType_();
-            number_ = number;
+            this.number_ = number;
         }
 
         public void setType_ () {

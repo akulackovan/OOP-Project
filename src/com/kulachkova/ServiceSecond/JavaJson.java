@@ -14,8 +14,8 @@ public class JavaJson {
 
     private List<Ship> ships;
 
-    public List<Ship> runServiceOne () {
-        ShipGenerator ship = new ShipGenerator(100);
+    public List<Ship> runServiceOne (int number) {
+        ShipGenerator ship = new ShipGenerator(number);
         ships = ship.getShips();
         write();
         return ships;
@@ -35,12 +35,32 @@ public class JavaJson {
             String type = in.next();
             System.out.print("Cargo number: ");
             int number = in.nextInt();
+            if (number < 1)
+            {
+                System.out.println("Number>0");
+                continue;
+            }
             System.out.print("Day of begin: ");
             int day = in.nextInt();
+            if (day > 30 || day < 1)
+            {
+                System.out.println("Day [1; 30]");
+                continue;
+            }
             System.out.print("Hour of begin: ");
             int hour = in.nextInt();
+            if (hour > 23 || hour < 0)
+            {
+                System.out.println("Day [0; 23]");
+                continue;
+            }
             System.out.print("Minute of begin: ");
             int minute = in.nextInt();
+            if (minute > 60 || minute < 0)
+            {
+                System.out.println("Minute [0; 59]");
+                continue;
+            }
             String time = "2021-04-" + day + " " + hour + ":" + minute + ":" + "00.000";
             Timestamp timestamp = Timestamp.valueOf(time);
             Ship ship = new Ship(string, timestamp, new Ship.Cargo(type, number));
@@ -49,7 +69,7 @@ public class JavaJson {
     }
 
     public void write (Unloading unloading) {
-        List<Ship> ships = unloading.getListAll();
+        List<Ship> ships = unloading.getList();
         JSONArray shipJSON = new JSONArray();
         for (Ship ship : ships) {
             JSONObject jsonObject = new JSONObject();

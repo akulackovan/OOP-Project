@@ -8,9 +8,9 @@ import java.util.*;
 
 public class ArrivalOfShips {
 
-    private List<Ship> loose;
-    private List<Ship> liquid;
-    private List<Ship> container;
+    private final List<Ship> loose;
+    private final List<Ship> liquid;
+    private final List<Ship> container;
 
     public ArrivalOfShips (List<Ship> ships) {
         loose = new ArrayList<>();

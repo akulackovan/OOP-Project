@@ -5,7 +5,7 @@ public enum typeOfCargo {
     LIQUID(2),
     CONTAINER(3);
 
-    private int hour;
+    private final int hour;
 
     typeOfCargo (int i) {
         hour = i;

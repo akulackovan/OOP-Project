@@ -5,48 +5,45 @@ import com.kulachkova.ServiceOne.typeOfCargo;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class Worker {
 
-    private ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
-    private typeOfCargo type;
+    private final ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Ship> shipsProcessed = new ConcurrentLinkedQueue<>();
+    private final typeOfCargo type;
     private long fine;
-    List<Thread> threads;
 
-    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
+    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException, ExecutionException {
         this.ships.addAll(ships);
         this.type = type;
         fine = 30000 * number;
-        threads = new ArrayList<Thread>();
+        ExecutorService executorService = Executors.newFixedThreadPool(number);
+        List<Future> futures = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            threads.add(new Thread(work(i)));
+            futures.add(executorService.submit(Unload()));
         }
-        for (Thread thread: threads) {
-            thread.start();
+        for (Future future : futures) {
+            future.get();
         }
-        for (Thread thread: threads) {
-            thread.join();
-        }
+        executorService.shutdown();
     }
 
     public long getFine () {
         return fine;
     }
 
-    public Runnable work (int i) throws InterruptedException {
+    public Runnable Unload () {
         Crane crane = new Crane(type);
         Runnable task = () -> {
             Ship first = null;
             Ship last;
-            while (!this.ships.isEmpty()) {
-                synchronized (Worker.class) {
-                    last = this.ships.poll();
-                }
-                if (last != null)
-                {
+            while (!ships.isEmpty()) {
+                last = ships.poll();
+                if (last != null) {
                     if (first != null) {
                         queue(first, last);
                     }
@@ -54,6 +51,7 @@ public class Worker {
                     last.setFine_();
                     fine += last.getFine_();
                     first = last;
+                    shipsProcessed.add(last);
                 }
             }
         };
@@ -81,6 +79,6 @@ public class Worker {
     }
 
     public List<Ship> getShips () {
-        return (List<Ship>) ships;
+        return Arrays.asList(shipsProcessed.toArray(new Ship[shipsProcessed.size()]));
     }
 }

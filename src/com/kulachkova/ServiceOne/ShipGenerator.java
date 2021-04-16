@@ -5,7 +5,7 @@ import java.util.*;
 
 public class ShipGenerator {
 
-    private List<Ship> ships;
+    private final List<Ship> ships;
 
     public ShipGenerator (int number) {
         ships = new ArrayList<Ship>();
