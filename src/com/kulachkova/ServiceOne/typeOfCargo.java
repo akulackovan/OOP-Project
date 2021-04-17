@@ -3,7 +3,7 @@ package com.kulachkova.ServiceOne;
 public enum typeOfCargo {
     LOOSE(1),
     LIQUID(2),
-    CONTAINER(3);
+    CONTAINER(1);
 
     private final int hour;
 

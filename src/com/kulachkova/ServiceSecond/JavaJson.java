@@ -41,7 +41,7 @@ public class JavaJson {
         finalOutput.put("Ships", shipJSON);
         try (FileWriter file = new FileWriter("src\\resource\\arrivalOfShips.JSON")) {
             file.write(finalOutput.toString());
-            System.out.println("Successfully Copied JSON Object to File...");
+            System.out.println("Service 1 was written in JSON");
         }
         catch (Exception e) {
             System.out.println(e);
@@ -144,7 +144,7 @@ public class JavaJson {
         finalOutput.put("Ships", shipJSON);
         try (FileWriter file = new FileWriter("src\\resource\\report.JSON")) {
             file.write(finalOutput.toString());
-            System.out.println("Successfully Copied JSON Object to File...");
+            System.out.println("Service 3 was written in JSON");
         }
         catch (Exception e) {
             System.out.println(e);

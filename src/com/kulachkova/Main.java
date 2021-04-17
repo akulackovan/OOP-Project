@@ -9,9 +9,9 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, ExecutionException, IOException, ParseException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         JavaJson jsonJava = new JavaJson();
-        jsonJava.runServiceOne(30);
+        jsonJava.runServiceOne(50);
         Unloading unloading = new Unloading(jsonJava.readServiceOne());
         jsonJava.writeServiceThree(unloading);
         unloading.report();

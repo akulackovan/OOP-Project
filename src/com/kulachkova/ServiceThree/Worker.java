@@ -4,27 +4,26 @@ import com.kulachkova.ServiceOne.Ship;
 import com.kulachkova.ServiceOne.typeOfCargo;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class Worker {
-    private CountDownLatch latch;
+    private final CountDownLatch latch;
     private final ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Ship> shipsProcessed = new ConcurrentLinkedQueue<>();
     private final typeOfCargo type;
     private long fine;
 
-    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException, ExecutionException {
+    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
         this.ships.addAll(ships);
         this.type = type;
         fine = 30000 * number;
         ExecutorService executorService = Executors.newFixedThreadPool(number);
-        latch = new CountDownLatch(number);
+        latch = new CountDownLatch(ships.size());
         for (int i = 0; i < number; i++) {
-            executorService.submit(Unload());
+            executorService.submit(unload());
         }
         latch.await();
         executorService.shutdown();
@@ -34,7 +33,7 @@ public class Worker {
         return fine;
     }
 
-    public Runnable Unload () {
+    public Runnable unload () {
         Crane crane = new Crane(type);
         Runnable task = () -> {
             Ship first = null;
@@ -43,21 +42,21 @@ public class Worker {
                 last = ships.poll();
                 if (last != null) {
                     if (first != null) {
-                        queue(first, last);
+                        makeQueue(first, last);
                     }
                     crane.unloading(last);
                     last.setFine_();
                     fine += last.getFine_();
                     first = last;
                     shipsProcessed.add(last);
+                    latch.countDown();
                 }
             }
-            latch.countDown();
         };
         return task;
     }
 
-    public synchronized void queue (Ship shipFirst, Ship shipSecond) {
+    public synchronized void makeQueue (Ship shipFirst, Ship shipSecond) {
         Timestamp first = shipFirst.getRealTimeEnd_();
         Timestamp second = shipSecond.getRealTimeArrival_();
         long milliseconds = second.getTime() - first.getTime();
