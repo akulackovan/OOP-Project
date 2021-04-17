@@ -46,7 +46,10 @@ public class Worker {
                     }
                     crane.unloading(last);
                     last.setFine_();
-                    fine += last.getFine_();
+                    synchronized (Worker.class)
+                    {
+                        fine += last.getFine_();
+                    }
                     first = last;
                     shipsProcessed.add(last);
                     latch.countDown();
