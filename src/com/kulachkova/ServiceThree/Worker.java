@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 public class Worker {
-
+    private CountDownLatch latch;
     private final ConcurrentLinkedQueue<Ship> ships = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Ship> shipsProcessed = new ConcurrentLinkedQueue<>();
     private final typeOfCargo type;
@@ -22,13 +22,11 @@ public class Worker {
         this.type = type;
         fine = 30000 * number;
         ExecutorService executorService = Executors.newFixedThreadPool(number);
-        List<Future> futures = new ArrayList<>();
+        latch = new CountDownLatch(number);
         for (int i = 0; i < number; i++) {
-            futures.add(executorService.submit(Unload()));
+            executorService.submit(Unload());
         }
-        for (Future future : futures) {
-            future.get();
-        }
+        latch.await();
         executorService.shutdown();
     }
 
@@ -54,6 +52,7 @@ public class Worker {
                     shipsProcessed.add(last);
                 }
             }
+            latch.countDown();
         };
         return task;
     }
