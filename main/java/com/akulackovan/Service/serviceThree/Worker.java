@@ -1,13 +1,18 @@
-package com.kulachkova.ServiceThree;
+package com.akulackovan.Service.serviceThree;
 
-import com.kulachkova.ServiceOne.Ship;
-import com.kulachkova.ServiceOne.typeOfCargo;
+
+
+import com.akulackovan.Service.entity.Ship;
+import com.akulackovan.Service.entity.typeOfCargo;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Worker {
     private final CountDownLatch latch;

@@ -1,9 +1,13 @@
-package com.kulachkova.ServiceThree;
+package com.akulackovan.Service.serviceThree;
 
-import com.kulachkova.ServiceOne.Ship;
+
+import com.akulackovan.Service.entity.Ship;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.List;
 
 public class ArrivalOfShips {
 
@@ -42,9 +46,15 @@ public class ArrivalOfShips {
 
     private void addToList (Ship ship) {
         switch (ship.getTypeOfCargo()) {
-            case LOOSE -> loose.add(ship);
-            case CONTAINER -> container.add(ship);
-            case LIQUID -> liquid.add(ship);
+            case LOOSE: {
+                loose.add(ship);
+            }
+            case CONTAINER: {
+                container.add(ship);
+            }
+            case LIQUID: {
+                liquid.add(ship);
+            }
         }
     }
 

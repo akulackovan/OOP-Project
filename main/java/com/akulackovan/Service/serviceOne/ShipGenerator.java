@@ -1,7 +1,14 @@
-package com.kulachkova.ServiceOne;
+package com.akulackovan.Service.serviceOne;
+
+
+import com.akulackovan.Service.entity.Ship;
+import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 public class ShipGenerator {
 
@@ -38,7 +45,7 @@ public class ShipGenerator {
     public Ship.Cargo CreateCargo () {
         final String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = nameOfType[(int) (Math.random() * 3)];
-        int number = (int) (Math.random() * 200) + 1;
+        int number = (int) (Math.random() * 50) + 1;
         return new Ship.Cargo(name, number);
     }
 

@@ -1,10 +1,14 @@
-package com.kulachkova.ServiceOne;
+package com.akulackovan.Service.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+@AllArgsConstructor
 public class Ship {
-
     private String name_;
     private Timestamp timeEnd_;
     private Timestamp realTimeEnd_;
@@ -38,6 +42,7 @@ public class Ship {
         return "Name: " + name_ + "\nCargo type: " + cargo_.name_ + "\nCargo number: " + cargo_.number_ + "\nTime arrival: "
                 + timeBegin_ + "\nTime departure: " + timeEnd_;
     }
+
 
     public String getUploadingTime () {
         int timeInHours = cargo_.type_.getHour();
@@ -99,22 +104,27 @@ public class Ship {
         }
     }
 
+    @JsonIgnore
     public String getNameType () {
         return cargo_.name_;
     }
 
+    @JsonIgnore
     public int getNumberOfCargo () {
         return cargo_.number_;
     }
 
+    @JsonIgnore
     public typeOfCargo getTypeOfCargo () {
         return cargo_.type_;
     }
 
+    @JsonIgnore
     public long getWaitTime_ () {
         return waitTime_;
     }
 
+    @JsonProperty("Wait time DD:HH:MM")
     public String getWaitString () {
         long time = waitTime_;
         int minute = (int) (time / 1000 / 60 % 60);
@@ -145,6 +155,7 @@ public class Ship {
 
     public static class Cargo {
 
+
         private final String name_;
         private final int number_;
         private typeOfCargo type_;
@@ -157,9 +168,15 @@ public class Ship {
 
         public void setType_ () {
             switch (name_) {
-                case "loose" -> type_ = typeOfCargo.LOOSE;
-                case "liquid" -> type_ = typeOfCargo.LIQUID;
-                case "container" -> type_ = typeOfCargo.CONTAINER;
+                case "loose": {
+                    type_ = typeOfCargo.LOOSE;
+                }
+                case "liquid": {
+                    type_ = typeOfCargo.LIQUID;
+                }
+                case "container": {
+                    type_ = typeOfCargo.CONTAINER;
+                }
             }
         }
     }

@@ -1,11 +1,13 @@
-package com.kulachkova.ServiceThree;
+package com.akulackovan.Service.serviceThree;
 
-import com.kulachkova.ServiceOne.Ship;
-import com.kulachkova.ServiceOne.typeOfCargo;
+
+import com.akulackovan.Service.entity.Ship;
+import com.akulackovan.Service.entity.typeOfCargo;
+import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 public class Unloading {
 
@@ -21,7 +23,7 @@ public class Unloading {
     private int maxDelay = 0;
     private int allDelay = 0;
 
-    public Unloading (List<Ship> ships) throws InterruptedException, ExecutionException {
+    public Unloading (List<Ship> ships) throws InterruptedException {
         ArrivalOfShips arrivalOfShips = new ArrivalOfShips(ships);
         looseList = arrivalOfShips.getLoose();
         liquidList = arrivalOfShips.getLiquid();
@@ -32,12 +34,15 @@ public class Unloading {
         numberOfShips += looseList.size() + liquidList.size() + containerList.size();
     }
 
-    public List<Ship> working (String typeString, typeOfCargo type, List<Ship> ships) throws InterruptedException, ExecutionException {
+    public List<Ship> working (String typeString, typeOfCargo type, List<Ship> ships) throws InterruptedException {
         System.out.println(typeString);
         long fine = 0;
         List<Ship> shipArrayList = new ArrayList<>();
         Worker worker = null;
-        for (int i = 1; i < ships.size(); i++) {
+        if (ships.size() == 0) {
+            return worker.getShips();
+        }
+        for (int i = 1; i <= ships.size(); i++) {
             worker = new Worker(i, ships, type);
             System.out.println("Crane " + i + " Fine " + worker.getFine());
             if (i != 1 && fine < worker.getFine()) {
@@ -125,9 +130,15 @@ public class Unloading {
 
     private void setNumberOfCargo (typeOfCargo type, int number) {
         switch (type) {
-            case LIQUID -> numberOfCraneLiquid = number;
-            case LOOSE -> numberOfCraneLoose = number;
-            case CONTAINER -> numberOfCraneContainer = number;
+            case LIQUID: {
+                numberOfCraneLiquid = number;
+            }
+            case LOOSE: {
+                numberOfCraneLoose = number;
+            }
+            case CONTAINER: {
+                numberOfCraneContainer = number;
+            }
         }
     }
 }

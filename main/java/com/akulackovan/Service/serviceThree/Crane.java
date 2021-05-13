@@ -1,6 +1,8 @@
-package com.kulachkova.ServiceThree;
+package com.akulackovan.Service.serviceThree;
 
-import com.kulachkova.ServiceOne.*;
+
+import com.akulackovan.Service.entity.Ship;
+import com.akulackovan.Service.entity.typeOfCargo;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
