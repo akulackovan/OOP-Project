@@ -1,22 +1,14 @@
 package com.akulackovan.Service.serviceTwo;
 
-import com.akulackovan.Service.entity.Ship;
 import com.akulackovan.Service.exception.ServiceFileNotFoundException;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 @Service
 public class ServiceTwoImpl implements ServiceTwo {

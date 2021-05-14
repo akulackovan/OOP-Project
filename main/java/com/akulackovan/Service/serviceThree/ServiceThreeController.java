@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/serviceThree")
-public class ServerThreeController {
+public class ServiceThreeController {
 
     private ServiceThree serviceThree;
 
