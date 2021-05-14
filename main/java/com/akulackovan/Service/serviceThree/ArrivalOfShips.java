@@ -48,12 +48,17 @@ public class ArrivalOfShips {
         switch (ship.getTypeOfCargo()) {
             case LOOSE: {
                 loose.add(ship);
+                break;
             }
             case CONTAINER: {
                 container.add(ship);
+
+                break;
             }
             case LIQUID: {
                 liquid.add(ship);
+
+                break;
             }
         }
     }
@@ -62,7 +67,7 @@ public class ArrivalOfShips {
         Calendar cal = Calendar.getInstance();
         Timestamp timestamp = ship.getTimeBegin_();
         cal.setTimeInMillis(timestamp.getTime());
-        int minutes = (int) (Math.random() * (10080 * 2 + 1)) - 10080; //7 days is 10080 minutes
+        int minutes = (int) (Math.random() * (10080 * 2 + 1)) - 10080;
         cal.add(Calendar.MINUTE, minutes);
         timestamp = new Timestamp(cal.getTime().getTime());
         ship.setRealTimeArrival_(timestamp);

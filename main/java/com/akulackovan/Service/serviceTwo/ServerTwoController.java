@@ -1,16 +1,21 @@
 package com.akulackovan.Service.serviceTwo;
 
 import com.akulackovan.Service.entity.Ship;
+import com.akulackovan.Service.exeption.ServiceFileNotFoundException;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
+import javax.websocket.server.PathParam;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.List;
 
 @RestController
-@RequestMapping("serviceTwo")
+@RequestMapping("/serviceTwo")
 public class ServerTwoController {
 
     private ServiceTwo serviceTwo;
@@ -20,9 +25,32 @@ public class ServerTwoController {
         this.serviceTwo = serviceTwo;
     }
 
-    @GetMapping("get")
-    public List<Ship> getList () throws IOException {
-        return serviceTwo.getShips();
+    @GetMapping("/get")
+    public ResponseEntity<List<Ship>> getList () {
+        JavaJson javaJson = new JavaJson();
+        List<Ship> ships = javaJson.readServiceOne(serviceTwo.getShips());
+        return new ResponseEntity<>(ships, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{filename}")
+    public String getList (@PathVariable("filename") String filename) {
+        JavaJson javaJson = new JavaJson();
+        try {
+            return serviceTwo.getShips(filename);
+        }
+        catch (ServiceFileNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found");
+        }
+    }
+
+    @PostMapping("report")
+    public String getReport () {
+        try {
+            return serviceTwo.getReport();
+        }
+        catch (ServiceFileNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found");
+        }
     }
 
 

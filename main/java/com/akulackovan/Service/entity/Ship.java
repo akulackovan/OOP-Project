@@ -170,12 +170,18 @@ public class Ship {
             switch (name_) {
                 case "loose": {
                     type_ = typeOfCargo.LOOSE;
+
+                    break;
                 }
                 case "liquid": {
                     type_ = typeOfCargo.LIQUID;
+
+                    break;
                 }
                 case "container": {
                     type_ = typeOfCargo.CONTAINER;
+
+                    break;
                 }
             }
         }

@@ -40,7 +40,7 @@ public class Unloading {
         List<Ship> shipArrayList = new ArrayList<>();
         Worker worker = null;
         if (ships.size() == 0) {
-            return worker.getShips();
+            return ships;
         }
         for (int i = 1; i <= ships.size(); i++) {
             worker = new Worker(i, ships, type);
@@ -132,12 +132,18 @@ public class Unloading {
         switch (type) {
             case LIQUID: {
                 numberOfCraneLiquid = number;
+
+                break;
             }
             case LOOSE: {
                 numberOfCraneLoose = number;
+
+                break;
             }
             case CONTAINER: {
                 numberOfCraneContainer = number;
+
+                break;
             }
         }
     }

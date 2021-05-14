@@ -7,9 +7,11 @@ import java.util.List;
 
 @Service
 public class ServiceOneImpl implements ServiceOne{
+
+    private final ShipGenerator shipGenerator = new ShipGenerator(10);
+
     @Override
     public List<Ship> getList () {
-        ShipGenerator shipGenerator = new ShipGenerator(100);
         return shipGenerator.getShips();
     }
 }

@@ -2,7 +2,6 @@ package com.akulackovan.Service.serviceOne;
 
 
 import com.akulackovan.Service.entity.Ship;
-import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,10 +14,9 @@ public class ShipGenerator {
     private final List<Ship> ships;
 
     public ShipGenerator (int number) {
-        ships = new ArrayList<Ship>();
+        ships = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             try {
-
                 ships.add(CreateShip());
             }
             catch (Exception e) {
