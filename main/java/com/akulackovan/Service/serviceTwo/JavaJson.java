@@ -1,15 +1,12 @@
 package com.akulackovan.Service.serviceTwo;
 
 import com.akulackovan.Service.entity.Ship;
-import com.akulackovan.Service.exeption.ServiceFileNotFoundException;
+import com.akulackovan.Service.exception.ServiceFileNotFoundException;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;

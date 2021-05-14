@@ -1,6 +1,6 @@
 package com.akulackovan.Service.serviceTwo;
 
-import com.akulackovan.Service.exeption.ServiceFileNotFoundException;
+import com.akulackovan.Service.exception.ServiceFileNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
