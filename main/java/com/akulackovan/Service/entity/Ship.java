@@ -1,13 +1,9 @@
 package com.akulackovan.Service.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-@AllArgsConstructor
 public class Ship {
     private String name_;
     private Timestamp timeEnd_;
@@ -20,7 +16,7 @@ public class Ship {
     private long fine_;
     private int delay_;
 
-    public Ship (String name, Timestamp timeBegin, Cargo cargo) {
+    public Ship(String name, Timestamp timeBegin, Cargo cargo) {
         this.name_ = name;
         this.cargo_ = cargo;
         this.timeBegin_ = timeBegin;
@@ -29,7 +25,7 @@ public class Ship {
         this.waitTime_ = 0;
     }
 
-    public Timestamp stay (Timestamp timestamp) {
+    public Timestamp stay(Timestamp timestamp) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());
         int timeInHours = cargo_.type_.getHour();
@@ -38,13 +34,12 @@ public class Ship {
         return timestamp;
     }
 
-    public String toString () {
+    public String toString() {
         return "Name: " + name_ + "\nCargo type: " + cargo_.name_ + "\nCargo number: " + cargo_.number_ + "\nTime arrival: "
                 + timeBegin_ + "\nTime departure: " + timeEnd_;
     }
 
-
-    public String getUploadingTime () {
+    public String getUploadingTime() {
         int timeInHours = cargo_.type_.getHour();
         int time = cargo_.number_ * timeInHours;
         int day = time / 24;
@@ -52,51 +47,51 @@ public class Ship {
         return String.format("%02d:%02d:00", day, hour);
     }
 
-    public String getName_ () {
+    public String getName_() {
         return name_;
     }
 
-    public void setName_ (String name_) {
+    public void setName_(String name_) {
         this.name_ = name_;
     }
 
-    public Timestamp getTimeEnd_ () {
+    public Timestamp getTimeEnd_() {
         return timeEnd_;
     }
 
-    public void setTimeEnd_ (Timestamp timeEnd_) {
+    public void setTimeEnd_(Timestamp timeEnd_) {
         this.timeEnd_ = timeEnd_;
     }
 
-    public Timestamp getRealTimeEnd_ () {
+    public Timestamp getRealTimeEnd_() {
         return realTimeEnd_;
     }
 
-    public void setRealTimeEnd_ (Timestamp realTimeEnd_) {
+    public void setRealTimeEnd_(Timestamp realTimeEnd_) {
         this.realTimeEnd_ = realTimeEnd_;
     }
 
-    public Timestamp getTimeBegin_ () {
+    public Timestamp getTimeBegin_() {
         return timeBegin_;
     }
 
-    public void setTimeBegin_ (Timestamp timeBegin_) {
+    public void setTimeBegin_(Timestamp timeBegin_) {
         this.timeBegin_ = timeBegin_;
     }
 
-    public Timestamp getRealTimeArrival_ () {
+    public Timestamp getRealTimeArrival_() {
         return realTimeArrival_;
     }
 
-    public void setRealTimeArrival_ (Timestamp realTimeArrival_) {
+    public void setRealTimeArrival_(Timestamp realTimeArrival_) {
         this.realTimeArrival_ = realTimeArrival_;
     }
 
-    public long getFine_ () {
+    public long getFine_() {
         return fine_;
     }
 
-    public void setFine_ () {
+    public void setFine_() {
         long milliseconds = timeEnd_.getTime() - realTimeEnd_.getTime();
         if (milliseconds < 0) {
             int hour = -1 * (int) (milliseconds / 1000 / 3600);
@@ -104,28 +99,22 @@ public class Ship {
         }
     }
 
-    @JsonIgnore
-    public String getNameType () {
+    public String getNameType() {
         return cargo_.name_;
     }
 
-    @JsonIgnore
-    public int getNumberOfCargo () {
+    public int getNumberOfCargo() {
         return cargo_.number_;
     }
 
-    @JsonIgnore
-    public typeOfCargo getTypeOfCargo () {
-        return cargo_.type_;
-    }
+    public typeOfCargo getTypeOfCargo() { return cargo_.type_; }
 
-    @JsonIgnore
-    public long getWaitTime_ () {
+    public long getWaitTime_() {
         return waitTime_;
     }
 
     @JsonProperty("Wait time DD:HH:MM")
-    public String getWaitString () {
+    public String getWaitString() {
         long time = waitTime_;
         int minute = (int) (time / 1000 / 60 % 60);
         int day = (int) (time / (24 * 60 * 60 * 1000));
@@ -133,54 +122,49 @@ public class Ship {
         return String.format("%02d:%02d:%02d", day, hour, minute);
     }
 
-    public void setWaitTime_ (long waitTime_) {
+    public void setWaitTime_(long waitTime_) {
         this.waitTime_ = waitTime_;
     }
 
-    public Timestamp getRealTimeBegin_ () {
+    public Timestamp getRealTimeBegin_() {
         return realTimeBegin_;
     }
 
-    public void setRealTimeBegin_ (Timestamp realTimeBegin_) {
+    public void setRealTimeBegin_(Timestamp realTimeBegin_) {
         this.realTimeBegin_ = realTimeBegin_;
     }
 
-    public int getDelay_ () {
+    public int getDelay_() {
         return delay_;
     }
 
-    public void setDelay_ (int delay_) {
+    public void setDelay_(int delay_) {
         this.delay_ = delay_;
     }
 
     public static class Cargo {
-
-
         private final String name_;
         private final int number_;
         private typeOfCargo type_;
 
-        public Cargo (String name, int number) {
+        public Cargo(String name, int number) {
             this.name_ = name;
             setType_();
             this.number_ = number;
         }
 
-        public void setType_ () {
+        public void setType_() {
             switch (name_) {
                 case "loose": {
                     type_ = typeOfCargo.LOOSE;
-
                     break;
                 }
                 case "liquid": {
                     type_ = typeOfCargo.LIQUID;
-
                     break;
                 }
                 case "container": {
                     type_ = typeOfCargo.CONTAINER;
-
                     break;
                 }
             }

@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.net.URL;
 import java.util.List;
 
 @RestController
 @RequestMapping("/serviceOne")
-public class ServerOneController {
+public class ServiceOneController {
 
     private ServiceOne serviceOne;
 
@@ -37,13 +40,6 @@ public class ServerOneController {
         }
         JSONObject finalOutput = new JSONObject();
         finalOutput.put("Ships", shipJSON);
-        try (FileWriter file = new FileWriter("D:\\Test\\ServiceOne\\src\\main\\resources\\arrivalOfShips.JSON")) {
-            file.write(finalOutput.toString());
-            System.out.println("Service 1 was written in JSON");
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
         return finalOutput.toString();
     }
 }

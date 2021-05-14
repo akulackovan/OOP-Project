@@ -16,7 +16,7 @@ public class JavaJson {
 
     private List<Ship> ships;
 
-    public List<Ship> readServiceOne (String string) throws ServiceFileNotFoundException {
+    public List<Ship> readServiceOne(String string) throws ServiceFileNotFoundException {
         ships = new ArrayList<>();
         JSONParser jsonParser = new JSONParser();
         try {
@@ -39,7 +39,7 @@ public class JavaJson {
         return ships;
     }
 
-    public void write () {
+    public void write() {
         while (true) {
             System.out.println("Add ship? Y/N\n");
             Scanner in = new Scanner(System.in);
@@ -81,42 +81,4 @@ public class JavaJson {
             ships.add(ship);
         }
     }
-
-    /*public void writeServiceThree (Unloading unloading) {
-        List<Ship> ships = unloading.getList();
-        JSONObject report = new JSONObject();
-        report.put("Fine", unloading.getFine());
-        report.put("All Delay", unloading.getAllDelay());
-        report.put("Max Delay", unloading.getMaxDelay());
-        report.put("Number Of Crane Container", unloading.getNumberOfCraneContainer());
-        report.put("Number Of Crane Liquid", unloading.getNumberOfCraneLiquid());
-        report.put("Number Of Crane Loose", unloading.getNumberOfCraneLoose());
-        report.put("Number Of Ships", unloading.getNumberOfShips());
-        report.put("Time Wait", unloading.getTimeWait());
-        JSONArray shipJSON = new JSONArray();
-        for (Ship ship : ships) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Name ship", ship.getName_());
-            jsonObject.put("Arrival date", ship.getTimeBegin_().toString());
-            jsonObject.put("Departure date", ship.getTimeEnd_().toString());
-            jsonObject.put("Type of cargo", ship.getNameType());
-            jsonObject.put("Number of cargo", ship.getNumberOfCargo());
-            jsonObject.put("Real arrival date", ship.getRealTimeArrival_().toString());
-            jsonObject.put("Real time begin unloading", ship.getRealTimeBegin_().toString());
-            jsonObject.put("Real time end unloading", ship.getRealTimeEnd_().toString());
-            jsonObject.put("Wait time", ship.getWaitString());
-            jsonObject.put("Fine", ship.getFine_());
-            shipJSON.add(jsonObject);
-        }
-        JSONObject finalOutput = new JSONObject();
-        finalOutput.put("Report", report);
-        finalOutput.put("Ships", shipJSON);
-        try (FileWriter file = new FileWriter("src\\resource\\report.JSON")) {
-            file.write(finalOutput.toString());
-            System.out.println("Service 3 was written in JSON");
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-    }*/
 }

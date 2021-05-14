@@ -1,6 +1,5 @@
 package com.akulackovan.Service.serviceThree;
 
-
 import com.akulackovan.Service.entity.Ship;
 import com.akulackovan.Service.entity.typeOfCargo;
 
@@ -11,11 +10,11 @@ class Crane {
 
     private final int powerInHour;
 
-    public Crane (typeOfCargo type) {
+    public Crane(typeOfCargo type) {
         powerInHour = type.getHour();
     }
 
-    public void unloading (Ship ship) {
+    public void unloading(Ship ship) {
         Timestamp timestamp = ship.getRealTimeBegin_();
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(timestamp.getTime());

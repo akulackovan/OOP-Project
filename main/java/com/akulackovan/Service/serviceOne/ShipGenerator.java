@@ -1,6 +1,5 @@
 package com.akulackovan.Service.serviceOne;
 
-
 import com.akulackovan.Service.entity.Ship;
 
 import java.sql.Timestamp;
@@ -13,26 +12,21 @@ public class ShipGenerator {
 
     private final List<Ship> ships;
 
-    public ShipGenerator (int number) {
+    public ShipGenerator(int number) {
         ships = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            try {
-                ships.add(CreateShip());
-            }
-            catch (Exception e) {
-                System.out.println(e);
-            }
+            ships.add(CreateShip());
         }
         ships.sort(Comparator.comparing(Ship::getTimeBegin_));
         System.out.println(ships);
     }
 
-    public List<Ship> getShips () {
+    public List<Ship> getShips() {
         return ships;
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         StringBuilder string = new StringBuilder("Schedule of ships\n");
         for (int i = 0; i < ships.size(); i++) {
             string.append("Ship №").append(i + 1).append("\n").append(ships.get(i)).append("\n\n");
@@ -40,14 +34,14 @@ public class ShipGenerator {
         return string.toString();
     }
 
-    public Ship.Cargo CreateCargo () {
+    public Ship.Cargo CreateCargo() {
         final String[] nameOfType = new String[]{"loose", "liquid", "container"};
         String name = nameOfType[(int) (Math.random() * 3)];
         int number = (int) (Math.random() * 50) + 1;
         return new Ship.Cargo(name, number);
     }
 
-    private Ship CreateShip () throws Exception {
+    private Ship CreateShip() {
         final String[] nameOfShips = new String[]{"Alexandria", "Blue", "Aurora", "Gotha", "Grossadler", "Hawksub",
                 "Sea Queen", "Vulkan", "Empress", "Titanic", "Lenin", "Varyag", "Bismark", "Bebop", "Colossan", "Inferno",
                 "St. George", "Valhalla", "Stand. Victoria", "Calypso", "Demetor"};

@@ -1,7 +1,6 @@
 package com.akulackovan.Service.serviceThree;
 
 import com.akulackovan.Service.entity.Ship;
-import com.akulackovan.Service.serviceOne.ServiceOne;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.ParseException;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileWriter;
 import java.util.List;
 
 @RestController

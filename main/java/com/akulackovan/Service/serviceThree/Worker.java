@@ -1,7 +1,5 @@
 package com.akulackovan.Service.serviceThree;
 
-
-
 import com.akulackovan.Service.entity.Ship;
 import com.akulackovan.Service.entity.typeOfCargo;
 
@@ -21,7 +19,7 @@ public class Worker {
     private final typeOfCargo type;
     private long fine;
 
-    public Worker (int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
+    public Worker(int number, List<Ship> ships, typeOfCargo type) throws InterruptedException {
         this.ships.addAll(ships);
         this.type = type;
         fine = 30000 * number;
@@ -34,11 +32,11 @@ public class Worker {
         executorService.shutdown();
     }
 
-    public long getFine () {
+    public long getFine() {
         return fine;
     }
 
-    public Runnable unload () {
+    public Runnable unload() {
         Crane crane = new Crane(type);
         Runnable task = () -> {
             Ship first = null;
@@ -51,8 +49,7 @@ public class Worker {
                     }
                     crane.unloading(last);
                     last.setFine_();
-                    synchronized (Worker.class)
-                    {
+                    synchronized (Worker.class) {
                         fine += last.getFine_();
                     }
                     first = last;
@@ -64,7 +61,7 @@ public class Worker {
         return task;
     }
 
-    public synchronized void makeQueue (Ship shipFirst, Ship shipSecond) {
+    public synchronized void makeQueue(Ship shipFirst, Ship shipSecond) {
         Timestamp first = shipFirst.getRealTimeEnd_();
         Timestamp second = shipSecond.getRealTimeArrival_();
         long milliseconds = second.getTime() - first.getTime();
@@ -84,7 +81,7 @@ public class Worker {
         shipSecond.setRealTimeBegin_(second);
     }
 
-    public List<Ship> getShips () {
+    public List<Ship> getShips() {
         return Arrays.asList(shipsProcessed.toArray(new Ship[shipsProcessed.size()]));
     }
 }

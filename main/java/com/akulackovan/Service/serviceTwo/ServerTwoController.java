@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,34 +19,44 @@ public class ServerTwoController {
     private ServiceTwo serviceTwo;
 
     @Autowired
-    public void setServiceTwo (ServiceTwo serviceTwo) {
+    public void setServiceTwo(ServiceTwo serviceTwo) {
         this.serviceTwo = serviceTwo;
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Ship>> getList () {
-        JavaJson javaJson = new JavaJson();
-        List<Ship> ships = javaJson.readServiceOne(serviceTwo.getShips());
-        return new ResponseEntity<>(ships, HttpStatus.OK);
+    public String getList() {
+        return serviceTwo.getShips();
     }
 
     @GetMapping("/get/{filename}")
-    public String getList (@PathVariable("filename") String filename) {
-        JavaJson javaJson = new JavaJson();
+    public String getList(@PathVariable("filename") String filename) {
         try {
-            return serviceTwo.getShips(filename);
+            String str = serviceTwo.getShips(filename);
+            if (str.equals(""))
+            {
+                return "File empty";
+            }
+            return str;
         }
-        catch (ServiceFileNotFoundException e) {
+        catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found");
         }
     }
 
-    @PostMapping("report")
-    public String getReport () {
+    @PostMapping("/getReport")
+    public String getReport(@RequestBody String string) {
         try {
-            return serviceTwo.getReport();
+            if (string.equals("\"report\""))
+            {
+                return serviceTwo.getReport();
+            }
+            else {
+                FileWriter file = new FileWriter(".\\src\\main\\resources\\report.JSON");
+                file.write("");
+                return null;
+            }
         }
-        catch (ServiceFileNotFoundException e) {
+        catch (ServiceFileNotFoundException | IOException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "File not found");
         }
     }

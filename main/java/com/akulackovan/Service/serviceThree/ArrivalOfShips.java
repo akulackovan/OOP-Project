@@ -15,7 +15,7 @@ public class ArrivalOfShips {
     private final List<Ship> liquid;
     private final List<Ship> container;
 
-    public ArrivalOfShips (List<Ship> ships) {
+    public ArrivalOfShips(List<Ship> ships) {
         loose = new ArrayList<>();
         liquid = new ArrayList<>();
         container = new ArrayList<>();
@@ -25,26 +25,26 @@ public class ArrivalOfShips {
         container.sort(Comparator.comparing(Ship::getRealTimeArrival_));
     }
 
-    public List<Ship> getContainer () {
+    public List<Ship> getContainer() {
         return container;
     }
 
-    public List<Ship> getLiquid () {
+    public List<Ship> getLiquid() {
         return liquid;
     }
 
-    public List<Ship> getLoose () {
+    public List<Ship> getLoose() {
         return loose;
     }
 
-    private void read (List<Ship> ships) {
+    private void read(List<Ship> ships) {
         for (Ship o : ships) {
             randomTime(o);
             addToList(o);
         }
     }
 
-    private void addToList (Ship ship) {
+    private void addToList(Ship ship) {
         switch (ship.getTypeOfCargo()) {
             case LOOSE: {
                 loose.add(ship);
@@ -63,7 +63,7 @@ public class ArrivalOfShips {
         }
     }
 
-    private void randomTime (Ship ship) {
+    private void randomTime(Ship ship) {
         Calendar cal = Calendar.getInstance();
         Timestamp timestamp = ship.getTimeBegin_();
         cal.setTimeInMillis(timestamp.getTime());

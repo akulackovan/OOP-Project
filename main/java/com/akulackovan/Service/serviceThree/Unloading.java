@@ -1,13 +1,10 @@
 package com.akulackovan.Service.serviceThree;
 
-
 import com.akulackovan.Service.entity.Ship;
 import com.akulackovan.Service.entity.typeOfCargo;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Unloading {
 
@@ -132,17 +129,14 @@ public class Unloading {
         switch (type) {
             case LIQUID: {
                 numberOfCraneLiquid = number;
-
                 break;
             }
             case LOOSE: {
                 numberOfCraneLoose = number;
-
                 break;
             }
             case CONTAINER: {
                 numberOfCraneContainer = number;
-
                 break;
             }
         }
