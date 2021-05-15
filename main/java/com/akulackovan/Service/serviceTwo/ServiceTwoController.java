@@ -48,7 +48,7 @@ public class ServiceTwoController {
                 return serviceTwo.getReport();
             }
             else {
-                FileWriter file = new FileWriter(".\\src\\main\\resources\\report.JSON");
+                FileWriter file = new FileWriter(".\\src\\main\\resources\\json\\report.JSON");
                 file.write("");
                 return null;
             }

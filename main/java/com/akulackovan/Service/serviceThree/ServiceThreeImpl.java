@@ -4,7 +4,6 @@ import com.akulackovan.Service.entity.Ship;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
-import net.minidev.json.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +14,9 @@ import java.util.List;
 @Service
 public class ServiceThreeImpl implements ServiceThree {
     @Override
-    public List<Ship> getList () throws ParseException {
+    public List<Ship> getList() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8083/serviceTwo/get/arrivalOfShips";
+        String url = "http://localhost:8080/serviceTwo/get/arrivalOfShips";
         String responseEntity = restTemplate.getForObject(url, String.class);
         JSONParser jsonParser = new JSONParser();
         String str = responseEntity;
@@ -34,10 +33,9 @@ public class ServiceThreeImpl implements ServiceThree {
                 int number = Integer.parseInt(String.valueOf(ship.get("Number of cargo")));
                 ships.add(new Ship(name, arrivalDate, new Ship.Cargo(type, number)));
             }
-            System.out.println("Service 1 was read");
             return ships;
         }
-        catch(Exception e) {
+        catch (Exception e) {
             System.out.println("Parse error" + e);
         }
         return null;
