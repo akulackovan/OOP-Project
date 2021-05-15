@@ -16,7 +16,7 @@ public class ServiceThreeImpl implements ServiceThree {
     @Override
     public List<Ship> getList ()   {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8083/serviceTwo/get/arrivalOfShips";
+        String url = "http://localhost:8082/serviceTwo/get/arrivalOfShips";
         String responseEntity = restTemplate.getForObject(url, String.class);
         JSONParser jsonParser = new JSONParser();
         String str = responseEntity;
@@ -33,7 +33,6 @@ public class ServiceThreeImpl implements ServiceThree {
                 int number = Integer.parseInt(String.valueOf(ship.get("Number of cargo")));
                 ships.add(new Ship(name, arrivalDate, new Ship.Cargo(type, number)));
             }
-            System.out.println("Service 1 was read");
             return ships;
         }
         catch(Exception e) {

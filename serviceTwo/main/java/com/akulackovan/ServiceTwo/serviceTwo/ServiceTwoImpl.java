@@ -15,7 +15,7 @@ public class ServiceTwoImpl implements ServiceTwo {
     @Override
     public String getShips() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8083/serviceOne/generate";
+        String url = "http://localhost:8080/serviceOne/generate";
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
         String resourceName = ".\\src\\main\\resources\\json\\arrivalOfShips.JSON";
         try(FileWriter fileWriter = new FileWriter (resourceName)){

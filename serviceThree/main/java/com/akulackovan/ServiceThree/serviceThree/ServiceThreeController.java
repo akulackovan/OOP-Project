@@ -1,8 +1,6 @@
 package com.akulackovan.ServiceThree.serviceThree;
 
 import com.akulackovan.ServiceThree.entity.Ship;
-
-
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

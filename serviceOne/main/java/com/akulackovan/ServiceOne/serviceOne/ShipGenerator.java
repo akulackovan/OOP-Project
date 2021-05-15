@@ -1,6 +1,6 @@
-package com.akulackovan.Service.serviceOne;
+package com.akulackovan.ServiceOne.serviceOne;
 
-import com.akulackovan.Service.entity.Ship;
+import com.akulackovan.ServiceOne.entity.Ship;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

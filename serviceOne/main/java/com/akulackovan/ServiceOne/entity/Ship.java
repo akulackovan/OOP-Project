@@ -1,4 +1,4 @@
-package com.akulackovan.Service.entity;
+package com.akulackovan.ServiceOne.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Timestamp;
